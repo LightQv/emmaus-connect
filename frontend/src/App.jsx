@@ -1,13 +1,23 @@
-import Home from "./pages/Home";
-
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <Home />
-      <p>coucou</p>
-    </div>
+    <Routes>
+      {/* Public routes */}
+      {/* <Route path="/" element={<Welcome />} />
+      <Route path="/login" element={<Login />} /> */}
+
+      {/* Private routes */}
+      {/* Admin routes */}
+      {/* <Route element={<RequireAuth allowedRoles="admin" />}>
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+      </Route> */}
+      {/* User routes */}
+      {/* <Route element={<RequireAuth allowedRoles="user" />}>
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route> */}
+    </Routes>
   );
 }
 
