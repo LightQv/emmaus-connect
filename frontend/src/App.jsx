@@ -13,12 +13,12 @@ function App() {
       {/* Public routes */}
       <Route path="/" element={<Login />} />
       <Route path="/calc" element={<Calculator />} />
-        <Route path="/faq" element={<FAQ />} />
+      <Route path="/faq" element={<FAQ />} />
 
       {/* Admin routes */}
       <Route element={<RequireAuth allowedRoles="Admin" />}>
-      <Route path="/params" element={<Parameters />} />
-          <Route path="/users" element={<Users />} />
+        <Route path="/params" element={<Parameters />} />
+        <Route path="/users" element={<Users />} />
       </Route>
     </Routes>
   );
