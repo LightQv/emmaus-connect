@@ -38,3 +38,24 @@
   transform: rotate(90deg);
   transition: all 0.2s;
 }
+@media screen and (max-width: 1024px) {
+  .button {
+    width: 100%;
+    font-size: small;
+  }
+  .button img {
+    height: 20px;
+  }
+  .card {
+    margin: 3rem 1rem;
+    color: var(--main-color-dark);
+    overflow: scroll;
+  }
+  .card h2 {
+    font-family: var(--action-font);
+    font-size: x-large;
+  }
+  .answer {
+    font-size: small;
+  }
+}
