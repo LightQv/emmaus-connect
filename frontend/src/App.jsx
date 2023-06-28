@@ -1,22 +1,18 @@
-import { Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import RequireAuth from "./components/routes/RequireAuth";
+import Login from "./pages/Login";
 import "./App.css";
 
 function App() {
   return (
     <Routes>
       {/* Public routes */}
-      {/* <Route path="/" element={<Welcome />} />
-      <Route path="/login" element={<Login />} /> */}
+      <Route path="/" element={<Login />} />
 
-      {/* Private routes */}
       {/* Admin routes */}
-      {/* <Route element={<RequireAuth allowedRoles="admin" />}>
-        <Route path="/admin/dashboard" element={<AdminDashboard />} />
-      </Route> */}
-      {/* User routes */}
-      {/* <Route element={<RequireAuth allowedRoles="user" />}>
-        <Route path="dashboard" element={<Dashboard />} />
-      </Route> */}
+      <Route element={<RequireAuth allowedRoles="Admin" />}>
+        <Route path="calc" />
+      </Route>
     </Routes>
   );
 }
