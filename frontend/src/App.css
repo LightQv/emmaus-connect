@@ -1,4 +1,9 @@
 * {
+    /* --- reset --- */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: none;
     /* --- colors --- */
     --main-color: #00ACB0;
     --main-color-dark: #002743;
@@ -10,5 +15,7 @@
 }
 
 body {
+    width: 100dvw;
+    height: 100dvh;
     font-family: var(--main-font);
 }
