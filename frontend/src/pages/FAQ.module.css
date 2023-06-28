@@ -1,0 +1,61 @@
+.card {
+  margin: 3rem 6rem;
+  color: var(--main-color-dark);
+}
+.card h2 {
+  font-family: var(--action-font);
+  font-size: xx-large;
+}
+.accordionFaq .inactive {
+  display: none;
+}
+.accordionFaq > div {
+  margin: 20px 0;
+  background-color: var(--main-color);
+  border-radius: 10px;
+  padding: 10px;
+}
+.active {
+  color: white;
+  padding: 10px;
+}
+
+.button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 10px;
+  border-radius: 10px;
+  color: white;
+  background-color: var(--main-color);
+  transition: all 0.2s;
+}
+.arrow {
+  transition: all 0.2s;
+}
+.rotateIcon {
+  transform: rotate(90deg);
+  transition: all 0.2s;
+}
+@media screen and (max-width: 1024px) {
+  .button {
+    width: 100%;
+    font-size: small;
+  }
+  .button img {
+    height: 20px;
+  }
+  .card {
+    margin: 3rem 1rem;
+    color: var(--main-color-dark);
+    overflow: scroll;
+  }
+  .card h2 {
+    font-family: var(--action-font);
+    font-size: x-large;
+  }
+  .answer {
+    font-size: small;
+  }
+}
