@@ -44,7 +44,7 @@ CREATE TABLE IF NOT EXISTS `emmaus_connect`.`model` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-INSERT INTO model (name, coef, brand_id) VALUES ("Iphone 12", 1.2, 1), ("Iphone X", 1.0, 1), ("Galaxy S20", 1.2, 2), ("Galaxy Fold", 1.3, 2), ("Note 11", 1.0, 3), ("Note 12", 1.1, 3);
+INSERT INTO model (name, coef) VALUES ("Iphone 12", 1.2), ("Iphone X", 1.0), ("Galaxy S20", 1.2), ("Galaxy Fold", 1.3), ("Note 11", 1.0), ("Note 12", 1.1);
 -- -----------------------------------------------------
 -- Table `emmaus_connect`.`ram`
 -- -----------------------------------------------------
