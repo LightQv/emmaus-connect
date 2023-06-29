@@ -1,13 +1,10 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useUserContext } from "../contexts/UserContext";
 import styles from "./Navbar.module.css";
 import logo from "../assets/logo.png";
 import off from "../assets/off.svg";
 
 export default function Navbar() {
-  const [activeLink, setActiveLink] = useState("calc");
-  const navigate = useNavigate();
   const { user, logout } = useUserContext();
 
   const navlinksAdmin = [
@@ -22,14 +19,6 @@ export default function Navbar() {
     { name: "FAQ", link: "faq" },
   ];
 
-  const handleClickLink = (e) => {
-    setActiveLink(e.target.id);
-  };
-
-  useEffect(() => {
-    navigate(`/${activeLink}`);
-  }, [activeLink]);
-
   return (
     <nav className={styles.nav}>
       <div>
@@ -39,26 +28,28 @@ export default function Navbar() {
         {user.role === "Admin"
           ? navlinksAdmin.map((el) => (
               <li key={el.link}>
-                <button
-                  id={el.link}
+                <NavLink
+                  to={`/${el.link}`}
                   type="button"
-                  onClick={handleClickLink}
-                  className={activeLink === el.link ? styles.active : null}
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active} ${styles.link}` : styles.link
+                  }
                 >
                   {el.name}
-                </button>
+                </NavLink>
               </li>
             ))
           : navlinksUser.map((el) => (
               <li key={el.link}>
-                <button
-                  id={el.link}
+                <NavLink
+                  to={`/${el.link}`}
                   type="button"
-                  onClick={handleClickLink}
-                  className={activeLink === el.link ? styles.active : null}
+                  className={({ isActive }) =>
+                    isActive ? `${styles.active} ${styles.link}` : styles.link
+                  }
                 >
                   {el.name}
-                </button>
+                </NavLink>
               </li>
             ))}
         <li>
