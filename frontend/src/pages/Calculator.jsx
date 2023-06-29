@@ -157,7 +157,7 @@ export default function Calculator() {
     <div className={style.page}>
       <div className={style.empty} />
       <div className={style.content}>
-        <h2>Calculer l'indice d'un smartphone</h2>
+        <h2>Calculer le prix d'un smartphone</h2>
         <div className={style.pageContent}>
           <div className={style.cardForm}>
             <div className={style.form}>
@@ -231,7 +231,7 @@ export default function Calculator() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="state">Etat</label>
+                  <label htmlFor="state">État</label>
                   <select
                     type="text"
                     name="state"
@@ -247,7 +247,7 @@ export default function Calculator() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="screen">Ecran</label>
+                  <label htmlFor="screen">Écran</label>
                   <select
                     type="text"
                     name="screen"
