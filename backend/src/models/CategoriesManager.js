@@ -1,8 +1,8 @@
 const AbstractManager = require("./AbstractManager");
 
-class ItemManager extends AbstractManager {
+class CategoriesManager extends AbstractManager {
   constructor() {
-    super({ table: "item" });
+    super({ table: "categories" });
   }
 
   insert(item) {
@@ -17,6 +17,13 @@ class ItemManager extends AbstractManager {
       [item.title, item.id]
     );
   }
+
+  insertAll(csvData) {
+    return this.database.query(
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (name, val_min, val_max) VALUES ?`,
+      [csvData]
+    );
+  }
 }
 
-module.exports = ItemManager;
+module.exports = CategoriesManager;

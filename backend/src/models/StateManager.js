@@ -17,6 +17,13 @@ class StateManager extends AbstractManager {
       [item.title, item.id]
     );
   }
+
+  insertAll(csvData) {
+    return this.database.query(
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} state, weighting) VALUES ?`,
+      [csvData]
+    );
+  }
 }
 
 module.exports = StateManager;

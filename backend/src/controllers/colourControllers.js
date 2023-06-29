@@ -85,16 +85,12 @@ const destroy = (req, res) => {
 };
 
 const importTable = (req, res) => {
-  // console.log(req.file);
-
   const stream = fs.createReadStream(req.file.path);
   const csvData = [];
   const csvStream = fastcsv
     .parse()
-    .on("data", function (data) {
-      // console.log("data =", data);
+    .on("data", (data) => {
       csvData.push(data);
-      // console.log(csvData);
     })
     .on("end", () => {
       models.colour
@@ -109,6 +105,7 @@ const importTable = (req, res) => {
             });
             res.sendStatus(500);
           }
+          res.sendStatus(200);
         })
         .catch((err) => {
           fs.rm(req.file.path, (error) => {
