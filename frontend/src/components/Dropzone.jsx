@@ -5,6 +5,37 @@ import styles from "./Dropzone.module.css";
 
 function Dropzone({ parameter }) {
   const inputRef = useRef({ parameter });
+  let label;
+  if (parameter === "brand") {
+    label = "Marques";
+  }
+  if (parameter === "model") {
+    label = "Modèles";
+  }
+  if (parameter === "ram") {
+    label = "Mémoire vive";
+  }
+  if (parameter === "storage") {
+    label = "Stockage";
+  }
+  if (parameter === "colour") {
+    label = "Couleur";
+  }
+  if (parameter === "state") {
+    label = "Etat";
+  }
+  if (parameter === "network") {
+    label = "Réseau";
+  }
+  if (parameter === "screen") {
+    label = "Ecran";
+  }
+  if (parameter === "categories") {
+    label = "Catégories";
+  }
+  if (parameter === "price_index") {
+    label = "Indice de prix";
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,16 +51,12 @@ function Dropzone({ parameter }) {
       encType="multipart/form-data"
       onSubmit={(e) => handleSubmit(e)}
     >
-      <label htmlFor={parameter}>Changer les paramètres de {parameter}</label>
+      <label htmlFor={parameter}>{label} :</label>
       <input
         ref={inputRef}
         className={styles.dropZone}
         type="file"
         accept=".csv"
-        // onDrop={(e) => dropHandler(e)}
-        // onDragOver={(e) => {
-        //   onDragOverHandler(e);
-        // }}
         name={parameter}
       />
       <input type="submit" value="Envoyer" />
