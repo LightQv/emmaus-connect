@@ -4,7 +4,6 @@ const multer = require("multer");
 const upload = multer({ dest: "../public/uploads/" });
 
 const router = express.Router();
-
 const { validateUser } = require("./services/validators");
 const { getUserByEmailMiddleware } = require("./controllers/authControllers");
 const {
