@@ -1,4 +1,4 @@
-.page{
+.page {
   margin: 3rem 2rem;
   color: var(--main-color-dark);
 }
@@ -18,13 +18,14 @@
   display: flex;
   flex-direction: column;
 }
-.form input {
+.form input,
+.form select {
   background-color: var(--grey);
   margin: 0 0.5rem 0 0;
   padding: 1rem;
   border-radius: 10px;
 }
-.sendButton {
+.button {
   background-color: var(--secondary-color);
   color: white;
   padding: 1rem 2rem;

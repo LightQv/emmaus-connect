@@ -24,4 +24,8 @@ router.put("/api/users/:id", userControllers.edit);
 router.post("/api/users", validateUser, hashPassword, userControllers.add);
 router.delete("/api/users/:id", userControllers.destroy);
 
+const brandControllers = require("./controllers/brandControllers");
+
+router.get("/api/brand", brandControllers.browse);
+
 module.exports = router;
