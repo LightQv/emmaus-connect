@@ -1,0 +1,64 @@
+.formWrapper {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deleteModal {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+.deleteTitle {
+  color: var(--main-color-dark);
+  font-family: var(--action-font);
+  margin-bottom: 1rem;
+}
+
+.btnBox {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btnYes,
+.btnNo {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: bold;
+  width: 75%;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  cursor: pointer;
+}
+
+.btnYes {
+  background-color: var(--tertiary-color);
+}
+
+.btnNo {
+  background-color: rgb(176, 176, 176);
+}
+
+@media screen and (min-width: 1024px) {
+  .deleteModal {
+    padding: 2rem;
+  }
+
+  .deleteTitle {
+    font-size: 2rem;
+  }
+
+  .btnYes,
+  .btnNo {
+    padding: 0.75rem 1.5rem;
+  }
+}

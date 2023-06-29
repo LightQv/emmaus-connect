@@ -79,6 +79,7 @@ const userControllers = require("./controllers/userControllers");
 router.get("/api/users", userControllers.browse);
 router.get("/api/users/:id", userControllers.read);
 router.put("/api/users/:id", userControllers.edit);
+router.put("/api/users/pw/:id", hashPassword, userControllers.editPassword);
 router.post("/api/users", validateUser, hashPassword, userControllers.add);
 router.delete("/api/users/:id", userControllers.destroy);
 
