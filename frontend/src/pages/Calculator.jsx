@@ -64,6 +64,52 @@ export default function Calculator() {
     }
   }, [resultIndex]);
 
+  const [inputValueBrand, setInputValueBrand] = useState("");
+  const [suggestionsBrand, setSuggestionsBrand] = useState([]);
+
+  const handleInputChangeBrand = (event) => {
+    const data = event.target.value;
+    setInputValueBrand(data);
+    const marque = [];
+
+    for (let i = 0; i < brands.length; i += 1) {
+      marque.push(brands[i].name);
+    }
+
+    // Filtre les suggestions en fonction de la valeur de l'entrée
+    const filteredSuggestions = marque.filter((marque2) =>
+      marque2.toLowerCase().includes(data.toLowerCase())
+    );
+
+    setSuggestionsBrand(filteredSuggestions);
+  };
+  const [inputValueModel, setInputValueModel] = useState("");
+  const [suggestionsModel, setSuggestionsModel] = useState([]);
+
+  const handleInputChangeModel = (event) => {
+    const data = event.target.value;
+    setInputValueModel(data);
+    const marque3 = [];
+
+    for (let i = 0; i < brands.length; i += 1) {
+      marque3.push(models[i].name);
+    }
+
+    // Filtre les suggestions en fonction de la valeur de l'entrée
+    const filteredSuggestions = marque3.filter((marque2) =>
+      marque2.toLowerCase().includes(data.toLowerCase())
+    );
+
+    setSuggestionsModel(filteredSuggestions);
+  };
+  const handleSuggestionClickBrand = (suggestion) => {
+    setInputValueBrand(suggestion);
+    setSuggestionsBrand([]);
+  };
+  const handleSuggestionClickModel = (suggestion) => {
+    setInputValueModel(suggestion);
+    setSuggestionsModel([]);
+  };
   const formik = useFormik({
     initialValues: {
       brand: "",
@@ -166,21 +212,41 @@ export default function Calculator() {
                   <label htmlFor="brand">Marque</label>
                   <input
                     type="text"
-                    name="brand"
-                    placeholder="ex: Apple"
-                    value={formik.values.brands}
-                    onChange={formik.handleChange}
+                    value={inputValueBrand}
+                    onChange={handleInputChangeBrand}
                   />
+                  <ul>
+                    {suggestionsBrand.map((brand) => (
+                      <li key={brand}>
+                        <button
+                          type="button"
+                          onClick={() => handleSuggestionClickBrand(brand)}
+                        >
+                          {brand}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div>
                   <label htmlFor="model">Modèle</label>
                   <input
                     type="text"
-                    name="model"
-                    placeholder="ex: Iphone 12"
-                    value={formik.values.models}
-                    onChange={formik.handleChange}
+                    value={inputValueModel}
+                    onChange={handleInputChangeModel}
                   />
+                  <ul>
+                    {suggestionsModel.map((model) => (
+                      <li key={model}>
+                        <button
+                          type="button"
+                          onClick={() => handleSuggestionClickModel(model)}
+                        >
+                          {model}
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
                 <div>
                   <label htmlFor="ram">RAM</label>
