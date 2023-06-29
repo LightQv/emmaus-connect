@@ -5,6 +5,16 @@
   color: var(--main-color-dark);
 }
 
+.empty {
+  width: 100%;
+  height: 20%;
+}
+
+.userContent {
+  height: 80%;
+  width: 100%;
+}
+
 .titleWrapper {
   display: flex;
   width: 100%;
@@ -15,6 +25,7 @@
 .pageTitle {
   margin-bottom: 1rem;
   font-weight: bold;
+  font-family: var(--action-font);
 }
 
 .listWrapper {
@@ -28,6 +39,7 @@
   display: flex;
   flex-direction: column;
   width: 40%;
+  margin-bottom: 2rem;
 }
 
 .label {
@@ -40,6 +52,7 @@
   padding: 0.5rem;
   border-radius: 0.5rem;
   width: 100%;
+  background-color: var(--quad-color);
 }
 
 .input::placeholder {
@@ -51,6 +64,7 @@
   display: grid;
   width: 100%;
   grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 .btnAdd {
@@ -58,6 +72,7 @@
   height: fit-content;
   width: fit-content;
   align-self: center;
+  font-weight: bold;
   border-radius: 0.5rem;
   border-width: 0.5rem;
   border-color: var(--secondary-color);
@@ -90,27 +105,36 @@
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 20;
+  z-index: 50;
+  height: 100%;
+  width: 100%;
   display: flex;
-  height: 100dvh;
-  width: 1000dvw;
   justify-content: center;
   align-items: center;
   background-color: rgba(1, 1, 1, 0.8);
 }
 
 @media screen and (min-width: 1024px) {
+  .page {
+    padding: 1rem 5rem;
+  }
+
   .pageTitle {
     margin-bottom: 2rem;
-    font-size: larger;
+    font-size: 2.5rem;
   }
 
   .listWrapper {
     border-radius: 1rem;
   }
 
+  .searchBox {
+    width: 25%;
+  }
+
   .userList {
     grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
   }
 
   .btnAdd {

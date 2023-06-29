@@ -1,14 +1,45 @@
+.listBox {
+  list-style: none;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: fit-content;
+  background-color: var(--quad-color);
+  padding: 0.5rem 1rem;
+}
+
+.userContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.userName {
+  font-size: 1rem;
+}
+
+.userEmail,
+.userRole {
+  font-size: 1rem;
+}
+
+.btnBox {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .btnEdit,
 .btnDelete {
-  margin: 1rem auto;
   height: fit-content;
   width: fit-content;
   align-self: center;
   border-radius: 0.5rem;
   border-width: 0.5rem;
-  border-color: var(--main-color);
-  background-color: var(--main-color);
-  padding: 0.75rem 1.5rem;
+  border-color: rgb(176, 176, 176);
+  background-color: rgb(176, 176, 176);
+  padding: 0.75rem;
   font-size: 1rem;
   color: white;
   box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
@@ -20,7 +51,8 @@
 
 .btnEdit:hover,
 .btnDelete:hover {
-  opacity: 90%;
+  border-color: var(--main-color);
+  background-color: var(--main-color);
 }
 
 .btnEdit:disabled,
@@ -30,9 +62,13 @@
   cursor: initial;
 }
 
+.svgSize {
+  height: 1.25rem;
+  width: 1.25rem;
+}
+
 @media screen and (min-width: 1024px) {
-  .btnEdit,
-  .btnDelete {
-    margin-top: 2rem;
+  .listBox {
+    padding: 1rem 1.5rem;
   }
 }

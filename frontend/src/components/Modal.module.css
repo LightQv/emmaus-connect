@@ -1,22 +1,39 @@
 .modalPage {
-  display: flex;
   height: fit-content;
+  width: fit-content;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 0.5rem;
-  background-color: lightgray;
+  background-color: white;
 }
 
 .btnClose {
-  margin-right: 0.25rem;
-  margin-top: 1rem;
-  align-items: flex-end;
+  margin: 1rem 1rem 0 0;
+  align-self: flex-end;
   color: var(--main-color);
-  width: fit-content;
-  height: fit-content;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(176, 176, 176);
+  cursor: pointer;
+}
+
+.btnClose:hover {
+  background-color: var(--secondary-color);
+}
+
+.closeIcn {
+  height: 1rem;
+  width: 1rem;
 }
 
 @media screen and (min-width: 1024px) {
-  .modalPage {
-    width: fit-content;
-  }
+  /* .modalPage {
+    padding: 2rem 1.5rem;
+  } */
 }

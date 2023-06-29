@@ -1,21 +1,22 @@
 * {
-    /* --- reset --- */
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border: none;
-    /* --- colors --- */
-    --main-color: #00ACB0;
-    --main-color-dark: #002743;
-    --secondary-color: #FFCC38;
-    --tertiary-color: #E6334C;
-    /* --- fonts --- */
-    --main-font: 'Inter', sans-serif;
-    --action-font: 'Asap Condensed', sans-serif;
+  /* --- reset --- */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  /* --- colors --- */
+  --main-color: #00acb0;
+  --main-color-dark: #002743;
+  --secondary-color: #ffcc38;
+  --tertiary-color: #e6334c;
+  --quad-color: #f0f0f0;
+  /* --- fonts --- */
+  --main-font: "Inter", sans-serif;
+  --action-font: "Asap Condensed", sans-serif;
 }
 
 body {
-    font-family: var(--main-font);
+  font-family: var(--main-font);
 }
 
 .App {

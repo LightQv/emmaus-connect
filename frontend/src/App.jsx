@@ -11,12 +11,7 @@ import logo from "./assets/images/emmaus.svg";
 
 function App() {
   return (
-    <div
-      className="App"
-      style={{ backgroundImage: `url(${logo})` }}
-      div
-      className="App"
-    >
+    <div className="App" style={{ backgroundImage: `url(${logo})` }}>
       <Navbar />
       <Routes>
         {/* Public routes */}
