@@ -17,3 +17,9 @@
 body {
   font-family: var(--main-font);
 }
+
+.App {
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 40%;
+}

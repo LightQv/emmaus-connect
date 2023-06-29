@@ -1,0 +1,38 @@
+.btnEdit,
+.btnDelete {
+  margin: 1rem auto;
+  height: fit-content;
+  width: fit-content;
+  align-self: center;
+  border-radius: 0.5rem;
+  border-width: 0.5rem;
+  border-color: var(--main-color);
+  background-color: var(--main-color);
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  color: white;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  cursor: pointer;
+}
+
+.btnEdit:hover,
+.btnDelete:hover {
+  opacity: 90%;
+}
+
+.btnEdit:disabled,
+.btnDelete:disabled {
+  border-color: lightgray;
+  background-color: lightgray;
+  cursor: initial;
+}
+
+@media screen and (min-width: 1024px) {
+  .btnEdit,
+  .btnDelete {
+    margin-top: 2rem;
+  }
+}

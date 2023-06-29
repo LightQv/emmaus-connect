@@ -7,10 +7,11 @@ import FAQ from "./pages/FAQ";
 import Parameters from "./pages/Parameters";
 import Users from "./pages/Users";
 import "./App.css";
+import logo from "./assets/images/emmaus.svg";
 
 function App() {
   return (
-    <>
+    <div className="App" style={{ backgroundImage: `url(${logo})` }}>
       {/* <Navbar /> */}
       <Routes>
         {/* Public routes */}
@@ -24,7 +25,7 @@ function App() {
           <Route path="/users" element={<Users />} />
         </Route>
       </Routes>
-    </>
+    </div>
   );
 }
 

@@ -7,7 +7,7 @@ export default function RequireAuth({ allowedRoles }) {
   const { user } = useUserContext();
   const location = useLocation();
 
-  return user?.roles === allowedRoles ? (
+  return user?.role === allowedRoles ? (
     <Outlet />
   ) : (
     <Navigate to="/" state={{ from: location }} replace />

@@ -1,0 +1,22 @@
+.modalPage {
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  background-color: lightgray;
+}
+
+.btnClose {
+  margin-right: 0.25rem;
+  margin-top: 1rem;
+  align-items: flex-end;
+  color: var(--main-color);
+  width: fit-content;
+  height: fit-content;
+}
+
+@media screen and (min-width: 1024px) {
+  .modalPage {
+    width: fit-content;
+  }
+}
