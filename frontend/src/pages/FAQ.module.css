@@ -5,6 +5,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem 5rem;
 }
 
 .empty {
@@ -19,14 +20,19 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  scrollbar-width: none;
+}
+
+.faq::-webkit-scrollbar {
+  display: none;
 }
 
 .faq > h2 {
-  width: 80%;
+  width: 100%;
   font-family: var(--action-font);
   color: var(--main-color-dark);
-  font-size: xx-large;
-  color: var(--main-color-dark);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .accordionFaq .inactive {
@@ -34,8 +40,8 @@
 }
 
 .accordionFaq {
-  width: 80%;
-  margin: 20px 0;
+  width: 100%;
+  margin: 0.75rem 0;
   background-color: var(--main-color);
   border-radius: 10px;
   padding: 10px;
@@ -57,6 +63,7 @@
   color: white;
   background-color: var(--main-color);
   transition: all 0.2s;
+  cursor: pointer;
 }
 
 .arrow {

@@ -3,7 +3,7 @@ const fastcsv = require("fast-csv");
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.brand
+  models.parameter
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -15,7 +15,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.brand
+  models.parameter
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -31,14 +31,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const brand = req.body;
+  const parameter = req.body;
 
   // TODO validations (length, format...)
 
-  brand.id = parseInt(req.params.id, 10);
+  parameter.id = parseInt(req.params.id, 10);
 
-  models.brand
-    .update(brand)
+  models.parameter
+    .update(parameter)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -53,14 +53,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const brand = req.body;
+  const parameter = req.body;
 
   // TODO validations (length, format...)
 
-  models.brand
-    .insert(brand)
+  models.parameter
+    .insert(parameter)
     .then(([result]) => {
-      res.location(`/brands/${result.insertId}`).sendStatus(201);
+      res.location(`/parameters/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -69,7 +69,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.brand
+  models.parameter
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -93,7 +93,7 @@ const importTable = (req, res) => {
       csvData.push(data);
     })
     .on("end", () => {
-      models.brand
+      models.parameter
         .insertAll(csvData)
         .then(([result]) => {
           fs.rm(req.file.path, (err) => {

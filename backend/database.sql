@@ -41,17 +41,10 @@ CREATE TABLE IF NOT EXISTS `emmaus_connect`.`model` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `coef` DECIMAL(3,2) NOT NULL,
-  `brand_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `brand_id`),
-  INDEX `fk_model_brand1_idx` (`brand_id` ASC) VISIBLE,
-  CONSTRAINT `fk_model_brand1`
-    FOREIGN KEY (`brand_id`)
-    REFERENCES `emmaus_connect`.`brand` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-INSERT INTO model (name, coef, brand_id) VALUES ("Iphone 12", 1.2, 1), ("Iphone X", 1.0, 1), ("Galaxy S20", 1.2, 2), ("Galaxy Fold", 1.3, 2), ("Note 11", 1.0, 3), ("Note 12", 1.1, 3);
+INSERT INTO model (name, coef) VALUES ("Iphone 12", 1.2), ("Iphone X", 1.0), ("Galaxy S20", 1.2), ("Galaxy Fold", 1.3), ("Note 11", 1.0), ("Note 12", 1.1);
 -- -----------------------------------------------------
 -- Table `emmaus_connect`.`ram`
 -- -----------------------------------------------------

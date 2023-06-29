@@ -17,6 +17,13 @@ class NetworkManager extends AbstractManager {
       [item.title, item.id]
     );
   }
+
+  insertAll(csvData) {
+    return this.database.query(
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (name, value) VALUES ?`,
+      [csvData]
+    );
+  }
 }
 
 module.exports = NetworkManager;

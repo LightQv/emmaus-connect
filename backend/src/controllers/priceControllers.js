@@ -1,7 +1,9 @@
+const fs = require("node:fs");
+const fastcsv = require("fast-csv");
 const models = require("../models");
 
 const browse = (req, res) => {
-  models.item
+  models.price
     .findAll()
     .then(([rows]) => {
       res.send(rows);
@@ -13,7 +15,7 @@ const browse = (req, res) => {
 };
 
 const read = (req, res) => {
-  models.item
+  models.price
     .find(req.params.id)
     .then(([rows]) => {
       if (rows[0] == null) {
@@ -29,14 +31,14 @@ const read = (req, res) => {
 };
 
 const edit = (req, res) => {
-  const item = req.body;
+  const price = req.body;
 
   // TODO validations (length, format...)
 
-  item.id = parseInt(req.params.id, 10);
+  price.id = parseInt(req.params.id, 10);
 
-  models.item
-    .update(item)
+  models.price
+    .update(price)
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -51,14 +53,14 @@ const edit = (req, res) => {
 };
 
 const add = (req, res) => {
-  const item = req.body;
+  const price = req.body;
 
   // TODO validations (length, format...)
 
-  models.item
-    .insert(item)
+  models.price
+    .insert(price)
     .then(([result]) => {
-      res.location(`/items/${result.insertId}`).sendStatus(201);
+      res.location(`/prices/${result.insertId}`).sendStatus(201);
     })
     .catch((err) => {
       console.error(err);
@@ -67,7 +69,7 @@ const add = (req, res) => {
 };
 
 const destroy = (req, res) => {
-  models.item
+  models.price
     .delete(req.params.id)
     .then(([result]) => {
       if (result.affectedRows === 0) {
@@ -82,10 +84,46 @@ const destroy = (req, res) => {
     });
 };
 
+const importTable = (req, res) => {
+  const stream = fs.createReadStream(req.file.path);
+  const csvData = [];
+  const csvStream = fastcsv
+    .parse()
+    .on("data", (data) => {
+      csvData.push(data);
+    })
+    .on("end", () => {
+      models.price
+        .insertAll(csvData)
+        .then(([result]) => {
+          fs.rm(req.file.path, (err) => {
+            if (err) throw err;
+          });
+          if (result.affectedRows === 0) {
+            fs.rm(req.file.path, (err) => {
+              if (err) throw err;
+            });
+            res.sendStatus(500);
+          }
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          fs.rm(req.file.path, (error) => {
+            if (error) throw error;
+          });
+          console.error(err);
+          res.sendStatus(500);
+        });
+    });
+
+  stream.pipe(csvStream);
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  importTable,
 };
