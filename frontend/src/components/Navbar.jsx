@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../contexts/UserContext";
 import styles from "./Navbar.module.css";
 import logo from "../assets/logo.png";
 import off from "../assets/off.svg";
@@ -7,6 +8,7 @@ import off from "../assets/off.svg";
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("calc");
   const navigate = useNavigate();
+  const { logout } = useUserContext();
 
   const navlinks = [
     { name: "CALCULATRICE", link: "calc" },
@@ -42,7 +44,7 @@ export default function Navbar() {
           </li>
         ))}
         <li>
-          <button type="button">
+          <button type="button" onClick={() => logout()}>
             <img src={off} alt="disconnect" />
           </button>
         </li>
