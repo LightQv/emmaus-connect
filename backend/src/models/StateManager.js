@@ -1,8 +1,8 @@
 const AbstractManager = require("./AbstractManager");
 
-class ModelManager extends AbstractManager {
+class StateManager extends AbstractManager {
   constructor() {
-    super({ table: "model" });
+    super({ table: "state" });
   }
 
   insert(item) {
@@ -19,4 +19,4 @@ class ModelManager extends AbstractManager {
   }
 }
 
-module.exports = ModelManager;
+module.exports = StateManager;

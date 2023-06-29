@@ -1,8 +1,8 @@
 const AbstractManager = require("./AbstractManager");
 
-class ModelManager extends AbstractManager {
+class NetworkManager extends AbstractManager {
   constructor() {
-    super({ table: "model" });
+    super({ table: "network" });
   }
 
   insert(item) {
@@ -19,4 +19,4 @@ class ModelManager extends AbstractManager {
   }
 }
 
-module.exports = ModelManager;
+module.exports = NetworkManager;

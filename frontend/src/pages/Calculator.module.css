@@ -1,6 +1,17 @@
 .page {
-  margin: 3rem 2rem;
+  width: 100dvw;
+  height: 100dvh;
+  margin: 0 2rem;
   color: var(--main-color-dark);
+}
+.empty {
+  width: 100%;
+  height: 20%;
+}
+.content {
+  width: 100%;
+  height: 80%;
+  overflow: auto;
 }
 .page h2 {
   font-family: var(--action-font);
