@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `emmaus_connect`.`user` (
 ENGINE = InnoDB;
 
 INSERT INTO user (name, email, hashed_password, role) VALUES 
-("Pierre Labbé", "labbépierre@gmail.com", "$argon2id$v=19$m=16,t=2,p=1$cXFnN2s1ZHU0aTAwMDAwMA$XFP3Vrp4/huxiy9p4p2EAw", "Admin"),
+("Pierre Labbé", "labbepierre@gmail.com", "$argon2id$v=19$m=16,t=2,p=1$cXFnN2s1ZHU0aTAwMDAwMA$XFP3Vrp4/huxiy9p4p2EAw", "Admin"),
 ("Lucie Chev", "luciechev@gmail.com", "$argon2id$v=19$m=16,t=2,p=1$cXFnN2s1ZHU0aTAwMDAwMA$XFP3Vrp4/huxiy9p4p2EAw", "User");
 -- -----------------------------------------------------
 -- Table `emmaus_connect`.`brand`
