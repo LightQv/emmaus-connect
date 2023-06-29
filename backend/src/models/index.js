@@ -40,7 +40,10 @@ const RamManager = require("./RamManager");
 const ScreenManager = require("./ScreenManager");
 const StateManager = require("./StateManager");
 const StorageManager = require("./StorageManager");
+const UserManager = require("./UserManager");
 
+models.user = new UserManager();
+models.user.setDatabase(pool);
 models.brand = new BrandManager();
 models.brand.setDatabase(pool);
 models.categories = new CategoriesManager();
