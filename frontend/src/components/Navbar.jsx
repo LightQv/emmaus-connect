@@ -8,12 +8,17 @@ import off from "../assets/off.svg";
 export default function Navbar() {
   const [activeLink, setActiveLink] = useState("calc");
   const navigate = useNavigate();
-  const { logout } = useUserContext();
+  const { user, logout } = useUserContext();
 
-  const navlinks = [
+  const navlinksAdmin = [
     { name: "CALCULATRICE", link: "calc" },
     { name: "PARAMÈTRES", link: "params" },
     { name: "UTILISATEURS", link: "users" },
+    { name: "FAQ", link: "faq" },
+  ];
+
+  const navlinksUser = [
+    { name: "CALCULATRICE", link: "calc" },
     { name: "FAQ", link: "faq" },
   ];
 
@@ -31,18 +36,31 @@ export default function Navbar() {
         <img src={logo} alt="logo" />
       </div>
       <ul>
-        {navlinks.map((el) => (
-          <li key={el.link}>
-            <button
-              id={el.link}
-              type="button"
-              onClick={handleClickLink}
-              className={activeLink === el.link ? styles.active : null}
-            >
-              {el.name}
-            </button>
-          </li>
-        ))}
+        {user.role === "Admin"
+          ? navlinksAdmin.map((el) => (
+              <li key={el.link}>
+                <button
+                  id={el.link}
+                  type="button"
+                  onClick={handleClickLink}
+                  className={activeLink === el.link ? styles.active : null}
+                >
+                  {el.name}
+                </button>
+              </li>
+            ))
+          : navlinksUser.map((el) => (
+              <li key={el.link}>
+                <button
+                  id={el.link}
+                  type="button"
+                  onClick={handleClickLink}
+                  className={activeLink === el.link ? styles.active : null}
+                >
+                  {el.name}
+                </button>
+              </li>
+            ))}
         <li>
           <button type="button" onClick={() => logout()}>
             <img src={off} alt="disconnect" />
