@@ -1,4 +1,7 @@
 const express = require("express");
+const multer = require("multer");
+
+const upload = multer({ dest: "../public/uploads/" });
 
 const router = express.Router();
 
@@ -21,9 +24,15 @@ router.post("/items", itemControllers.add);
 router.delete("/items/:id", itemControllers.destroy);
 
 router.get("/brand", brandControllers.browse);
-router.post("/brand", brandControllers.add);
+// router.post("/brand", upload.single("brand"), brandControllers.importTable);
 router.get("/categories", categoriesControllers.browse);
-router.get("/colour", colourControllers.browse);
+router.post(
+  "/colour",
+  upload.single("colour"),
+  // colourControllers.dropTable,
+  // colourControllers.createTable,
+  colourControllers.importTable
+);
 router.get("/model", modelControllers.browse);
 router.get("/network", networkControllers.browse);
 router.get("/price", priceControllers.browse);

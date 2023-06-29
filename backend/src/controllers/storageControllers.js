@@ -1,3 +1,5 @@
+const fs = require("node:fs");
+const fastcsv = require("fast-csv");
 const models = require("../models");
 
 const browse = (req, res) => {
@@ -82,10 +84,49 @@ const destroy = (req, res) => {
     });
 };
 
+const importTable = (req, res) => {
+  // console.log(req.file);
+
+  const stream = fs.createReadStream(req.file.path);
+  const csvData = [];
+  const csvStream = fastcsv
+    .parse()
+    .on("data", function (data) {
+      // console.log("data =", data);
+      csvData.push(data);
+      // console.log(csvData);
+    })
+    .on("end", () => {
+      models.ram
+        .insertAll(csvData)
+        .then(([result]) => {
+          fs.rm(req.file.path, (err) => {
+            if (err) throw err;
+          });
+          if (result.affectedRows === 0) {
+            fs.rm(req.file.path, (err) => {
+              if (err) throw err;
+            });
+            res.sendStatus(500);
+          }
+        })
+        .catch((err) => {
+          fs.rm(req.file.path, (error) => {
+            if (error) throw error;
+          });
+          console.error(err);
+          res.sendStatus(500);
+        });
+    });
+
+  stream.pipe(csvStream);
+};
+
 module.exports = {
   browse,
   read,
   edit,
   add,
   destroy,
+  importTable,
 };

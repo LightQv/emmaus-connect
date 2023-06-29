@@ -21,10 +21,15 @@ function Dropzone({ parameter }) {
     formData.append(parameter, inputRef.current.files[0]);
     // console.log(inputRef.current.files[0]);
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/${parameter}`, formData);
+    e.target.reset();
   };
 
   return (
-    <form encType="multipart/form-data" onSubmit={(e) => handleSubmit(e)}>
+    <form
+      className={styles.formLine}
+      encType="multipart/form-data"
+      onSubmit={(e) => handleSubmit(e)}
+    >
       <label htmlFor={parameter}>Changer les paramètres de {parameter}</label>
       <input
         ref={inputRef}
@@ -44,6 +49,6 @@ function Dropzone({ parameter }) {
 
 export default Dropzone;
 
-Dropzone.FormPart.propTypes = {
+Dropzone.propTypes = {
   parameter: PropTypes.string.isRequired,
 };

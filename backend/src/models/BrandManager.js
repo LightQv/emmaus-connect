@@ -5,16 +5,10 @@ class BrandManager extends AbstractManager {
     super({ table: "brand" });
   }
 
-  insert(item) {
-    return this.database.query(`insert into ${this.table} (title) values (?)`, [
-      item.title,
-    ]);
-  }
-
-  update(item) {
+  insertAll(csvData) {
     return this.database.query(
-      `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (name, coef) VALUES ?`,
+      [csvData]
     );
   }
 }

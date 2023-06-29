@@ -5,16 +5,22 @@ class ColourManager extends AbstractManager {
     super({ table: "colour" });
   }
 
-  insert(item) {
-    return this.database.query(`insert into ${this.table} (title) values (?)`, [
-      item.title,
-    ]);
-  }
+  // drop() {
+  //   return this.database.query(
+  //     `DROP TABLE IF EXISTS emmaus_connect.${this.table}`
+  //   );
+  // }
 
-  update(item) {
+  // create() {
+  //   this.database.query(
+  //     `CREATE TABLE IF NOT EXISTS emmaus_connect.${this.table} (id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, name VARCHAR(45) NOT NULL, coef DECIMAL(3,2) NOT NULL)`
+  //   );
+  // }
+
+  insertAll(csvData) {
     return this.database.query(
-      `update ${this.table} set title = ? where id = ?`,
-      [item.title, item.id]
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (name, coef) VALUES ?`,
+      [csvData]
     );
   }
 }

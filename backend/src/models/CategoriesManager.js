@@ -17,6 +17,13 @@ class CategoriesManager extends AbstractManager {
       [item.title, item.id]
     );
   }
+
+  insertAll(csvData) {
+    return this.database.query(
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (name, val_min, val_max) VALUES ?`,
+      [csvData]
+    );
+  }
 }
 
 module.exports = CategoriesManager;
