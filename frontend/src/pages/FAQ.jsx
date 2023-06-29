@@ -38,35 +38,37 @@ export default function FAQ() {
   }
   return (
     <div className={style.page}>
-      <h2>Foire aux questions</h2>
-
-      {dataCollection.map((item, index) => (
-        <div className={style.accordionFaq}>
-          <button
-            type="button"
-            onClick={() => toggleAccordion(index)}
-            className={style.button}
-          >
-            <h3>{item.question}</h3>
-            <img
-              src={arrow}
-              alt="arrow"
-              className={`${
-                accordion === index ? style.rotateIcon : style.arrow
-              }`}
-            />
-          </button>
-          <div className={style.answer}>
-            <p
-              className={`${
-                accordion === index ? style.active : style.inactive
-              }`}
+      <div className={style.empty} />
+      <div className={style.faq}>
+        <h2>Foire aux questions</h2>
+        {dataCollection.map((item, index) => (
+          <div className={style.accordionFaq}>
+            <button
+              type="button"
+              onClick={() => toggleAccordion(index)}
+              className={style.button}
             >
-              {item.answer}
-            </p>
+              <h3>{item.question}</h3>
+              <img
+                src={arrow}
+                alt="arrow"
+                className={`${
+                  accordion === index ? style.rotateIcon : style.arrow
+                }`}
+              />
+            </button>
+            <div className={style.answer}>
+              <p
+                className={`${
+                  accordion === index ? style.active : style.inactive
+                }`}
+              >
+                {item.answer}
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
