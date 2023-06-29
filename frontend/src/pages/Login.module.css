@@ -80,6 +80,7 @@
   color: white;
   font-weight: bold;
   width: 75%;
+  cursor: pointer;
 }
 
 .btn:disabled {
