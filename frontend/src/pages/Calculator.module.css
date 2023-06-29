@@ -50,12 +50,18 @@
   flex-direction: column;
 }
 
+.form label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
 .form input,
 .form select {
   background-color: var(--quad-color);
   margin: 0 0.5rem 0 0;
   padding: 1rem;
   border-radius: 10px;
+  width: 100%;
 }
 
 .button {
@@ -75,12 +81,8 @@
   height: 2.5rem;
 }
 
-/* .chartShow {
-  display: flex;
-} */
-
 .chartShow {
-  animation: show 0.5s ease-in-out;
+  animation: show 0.75s ease-in-out;
 }
 
 @keyframes show {

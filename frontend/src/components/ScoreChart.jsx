@@ -6,14 +6,20 @@ import {
 import "react-circular-progressbar/dist/styles.css";
 import styles from "./ScoreChart.module.css";
 
-export default function ScoreChart({ categorie, value, price }) {
-  const percentage = value;
+export default function ScoreChart({ categorie, price }) {
+  const percentage = () => {
+    if (categorie === "C") return 25;
+    if (categorie === "B") return 50;
+    if (categorie === "A") return 75;
+    if (categorie === "S") return 100;
+    return null;
+  };
 
   return (
     <div className={styles.chartContainer}>
       <div className={styles.chartBox}>
         <CircularProgressbarWithChildren
-          value={percentage}
+          value={percentage()}
           minValue={0}
           maxValue={100}
           background
@@ -38,6 +44,5 @@ export default function ScoreChart({ categorie, value, price }) {
 
 ScoreChart.propTypes = {
   categorie: PropTypes.string.isRequired,
-  value: PropTypes.number.isRequired,
   price: PropTypes.number.isRequired,
 };

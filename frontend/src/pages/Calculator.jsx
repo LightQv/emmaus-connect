@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
-import { useState } from "react";
 import style from "./Calculator.module.css";
 import { formSchema } from "../services/validators";
 import { useCalcContext } from "../contexts/CalcContext";
@@ -22,6 +21,7 @@ export default function Calculator() {
   const [resultIndex, setResultIndex] = useState();
   const [resultCategory, setResultCategory] = useState();
   const [resultPrice, setResultPrice] = useState();
+  const [isCalculated, setIsCalculated] = useState(false);
 
   /* --- object containing the values needed for calculating the index --- */
   const calcValues = {
@@ -65,12 +65,6 @@ export default function Calculator() {
       findPrice();
     }
   }, [resultIndex]);
-  const [isCalculated, setIsCalculated] = useState(false);
-  const [results, setResults] = useState({
-    categorie: "",
-    value: "",
-    price: "",
-  });
 
   const formik = useFormik({
     initialValues: {
@@ -143,6 +137,7 @@ export default function Calculator() {
       /* --- calculate the result --- */
       const result = interValue + weight;
       setResultIndex(result);
+      setIsCalculated(true);
     },
   });
 
@@ -295,13 +290,8 @@ export default function Calculator() {
             </div>
           </div>
           {isCalculated && (
-            <div className={`${style.chartShow} ${isCalculated && `active`}`}>
-              {/* <div className={isCalculated ? style.chartShow : style.chartHidden}> */}
-              <ScoreChart
-                categorie={results.categorie}
-                value={results.value}
-                price={results.price}
-              />
+            <div className={style.chartShow}>
+              <ScoreChart categorie={resultCategory} price={resultPrice} />
             </div>
           )}
         </div>
