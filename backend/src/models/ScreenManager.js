@@ -17,6 +17,13 @@ class ScreenManager extends AbstractManager {
       [item.title, item.id]
     );
   }
+
+  insertAll(csvData) {
+    return this.database.query(
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (size, value) VALUES ?`,
+      [csvData]
+    );
+  }
 }
 
 module.exports = ScreenManager;

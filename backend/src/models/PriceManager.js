@@ -17,6 +17,13 @@ class PriceManager extends AbstractManager {
       [item.title, item.id]
     );
   }
+
+  insertAll(csvData) {
+    return this.database.query(
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (price) VALUES ?`,
+      [csvData]
+    );
+  }
 }
 
 module.exports = PriceManager;
