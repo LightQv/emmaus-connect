@@ -24,32 +24,29 @@ export default function Navbar() {
   }, [activeLink]);
 
   return (
-    <>
-      <nav className={styles.nav}>
-        <div>
-          <img src={logo} alt="logo" />
-        </div>
-        <ul>
-          {navlinks.map((el) => (
-            <li key={el.link}>
-              <button
-                id={el.link}
-                type="button"
-                onClick={handleClickLink}
-                className={activeLink === el.link ? styles.active : null}
-              >
-                {el.name}
-              </button>
-            </li>
-          ))}
-          <li>
-            <button type="button">
-              <img src={off} alt="disconnect" />
+    <nav className={styles.nav}>
+      <div>
+        <img src={logo} alt="logo" />
+      </div>
+      <ul>
+        {navlinks.map((el) => (
+          <li key={el.link}>
+            <button
+              id={el.link}
+              type="button"
+              onClick={handleClickLink}
+              className={activeLink === el.link ? styles.active : null}
+            >
+              {el.name}
             </button>
           </li>
-        </ul>
-      </nav>
-      <div className={styles.empty} />
-    </>
+        ))}
+        <li>
+          <button type="button">
+            <img src={off} alt="disconnect" />
+          </button>
+        </li>
+      </ul>
+    </nav>
   );
 }
