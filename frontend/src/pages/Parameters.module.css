@@ -1,0 +1,29 @@
+.page {
+  width: 100dvw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 5rem;
+  color: var(--main-color-dark);
+}
+
+.empty {
+  width: 100%;
+  height: 20%;
+}
+
+.page h2 {
+  width: 100%;
+  font-family: var(--action-font);
+  color: var(--main-color-dark);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+}
+
+.content {
+  width: 100%;
+  height: 80%;
+  overflow: auto;
+}

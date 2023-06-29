@@ -1,0 +1,53 @@
+.formLine {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 1em;
+}
+
+.labelBox {
+  align-self: flex-start;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.dropZone {
+  cursor: pointer;
+}
+
+.info {
+  width: 1em;
+}
+
+.inputBox {
+  display: flex;
+  gap: 0.25rem;
+}
+
+.inputs {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.5rem;
+  background-color: var(--quad-color);
+  padding: 1em 0.7em;
+}
+
+.buttonImg {
+  cursor: pointer;
+  height: 100%;
+}
+
+.button {
+  height: fit-content;
+  width: fit-content;
+}
