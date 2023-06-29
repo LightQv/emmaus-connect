@@ -28,7 +28,7 @@ export default function Calculator() {
     },
 
     validationSchema: formSchema,
-    onSubmit: async (values) => {
+    onSubmit: async () => {
       // calculator
       setIsCalculated(true);
       setResults({ categorie: "4-B", value: 12, price: 10.0 });
