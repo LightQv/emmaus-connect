@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import style from "./Calculator.module.css";
 import { formSchema } from "../services/validators";
 import { useCalcContext } from "../contexts/CalcContext";
 
 export default function Calculator() {
-  const { brands, models, rams, storages, colors, states, screens, networks } =
-    useCalcContext();
+  const {
+    brands,
+    models,
+    rams,
+    storages,
+    colors,
+    states,
+    screens,
+    networks,
+    priceIndexes,
+    categories,
+  } = useCalcContext();
   const [resultIndex, setResultIndex] = useState();
+  const [resultCategory, setResultCategory] = useState();
+  const [resultPrice, setResultPrice] = useState();
 
+  /* --- object containing the values needed for calculating the index --- */
   const calcValues = {
     coef: {
       brand: 0,
@@ -26,6 +39,31 @@ export default function Calculator() {
     },
   };
 
+  /* --- calculate the final category for the smartphone --- */
+  const findCategory = () => {
+    categories.forEach((cat) => {
+      if (
+        Math.round(resultIndex) >= cat.val_min &&
+        Math.round(resultIndex) <= cat.val_max
+      ) {
+        setResultCategory(cat.name);
+      }
+    });
+  };
+
+  /* --- calculate the final price for the smartphone --- */
+  const findPrice = () => {
+    setResultPrice(Math.round(resultIndex * parseFloat(priceIndexes[0].price)));
+  };
+
+  /* --- find the category and the price once the index is calculated --- */
+  useEffect(() => {
+    if (resultIndex) {
+      findCategory();
+      findPrice();
+    }
+  }, [resultIndex]);
+
   const formik = useFormik({
     initialValues: {
       brand: "",
@@ -37,9 +75,9 @@ export default function Calculator() {
       screen: "",
       network: "",
     },
-
     validationSchema: formSchema,
     onSubmit: (values) => {
+      /* --- updating the object containing the values need for calculation with the specs enter by the user --- */
       brands.forEach((brand) => {
         if (values.brand === brand.name) {
           calcValues.coef.brand = parseFloat(brand.coef);
@@ -118,7 +156,9 @@ export default function Calculator() {
       <div className={style.content}>
         <h2>Calculer l'indice d'un smartphone</h2>
         <div>
-          <div>{resultIndex}</div>
+          {resultCategory && resultPrice ? (
+            <div>{`Catégorie : ${resultCategory} | Prix : ${resultPrice}`}</div>
+          ) : null}
           <div className={style.cardForm}>
             <div className={style.form}>
               <form className={style.formGrid} onSubmit={formik.handleSubmit}>
