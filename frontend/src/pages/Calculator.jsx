@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
+import { ToastContainer } from "react-toastify";
 import style from "./Calculator.module.css";
 import { formSchema } from "../services/validators";
 import { useCalcContext } from "../contexts/CalcContext";
 import ScoreChart from "../components/ScoreChart";
+import { notifyError } from "../services/toasts";
 
 export default function Calculator() {
   const {
@@ -22,6 +24,7 @@ export default function Calculator() {
   const [resultCategory, setResultCategory] = useState();
   const [resultPrice, setResultPrice] = useState();
   const [isCalculated, setIsCalculated] = useState(false);
+  const [message, setMessage] = useState(null);
 
   /* --- object containing the values needed for calculating the index --- */
   const calcValues = {
@@ -66,6 +69,13 @@ export default function Calculator() {
     }
   }, [resultIndex]);
 
+  useEffect(() => {
+    if (message) {
+      notifyError(message);
+      setMessage(null);
+    }
+  }, [message]);
+
   const formik = useFormik({
     initialValues: {
       brand: "",
@@ -80,6 +90,13 @@ export default function Calculator() {
     validationSchema: formSchema,
     onSubmit: (values) => {
       /* --- updating the object containing the values need for calculation with the specs enter by the user --- */
+      if (!brands.some((brand) => brand.name === values.brand)) {
+        return setMessage("Cette marque n'existe pas. Vérifiez l'orthographe.");
+      }
+      if (!models.some((model) => model.name === values.model)) {
+        return setMessage("Ce modèle n'existe pas. Vérifiez l'orthographe.");
+      }
+
       brands.forEach((el) => {
         if (values.brand === el.name) {
           calcValues.coef.brand = parseFloat(el.coef);
@@ -137,7 +154,7 @@ export default function Calculator() {
       /* --- calculate the result --- */
       const result = interValue + weight;
       setResultIndex(result);
-      setIsCalculated(true);
+      return setIsCalculated(true);
     },
   });
 
@@ -296,6 +313,7 @@ export default function Calculator() {
           )}
         </div>
       </div>
+      <ToastContainer limit={1} />
     </div>
   );
 }
