@@ -4,27 +4,31 @@ import arrow from "../assets/icons/arrow.svg";
 
 const dataCollection = [
   {
-    question: "Comment puis-je modifier mon compte?",
+    question: "Comment puis-je modifier les informations de mon compte ?",
     answer:
-      "Nous vous invitons à contacter votre administrateur, via le formulaire de contact, pour toutes modifications de compte.",
+      "Nous vous invitons à contacter votre administrateur pour toute création, modification ou suppression de compte utilisateur.",
   },
   {
-    question: "Comment puis-je contacter le service administratif?",
+    question: "Comment puis-je contacter l'administrateur ?",
     answer:
-      "Vous pouvez contacter le service administratif via le formulaire de contact.",
-  },
-  {
-    question: "Comment remplir le formulaire?",
-    answer: "",
-  },
-  {
-    question: "Quel coefficient est appliqué à quelle valeur?",
-    answer: "",
+      "Vous pouvez contacter l'administrateur via l'adresse  de contact habituelle.",
   },
   {
     question:
-      "Quelles sont les caractéristiques à remplir pour obtenir le prix?",
-    answer: "",
+      "Je ne trouve pas les caractéristiques voulues dans le formulaire, que dois-je faire ?",
+    answer:
+      "Assurez-vous que les caractéristiques répondent au minimum requis. Si de nouvelles informations doivent être ajoutées à la base de données, contactez votre administrateur.",
+  },
+  {
+    question: "Quel est la configuration minimale requise ?",
+    answer:
+      "Mémoire Vive : 2Go. Stockage : 16Go. Taille de l'écran : 4 pouces. Réseau : 4G. ",
+  },
+  {
+    question:
+      "Le calculateur ne me donne pas de prix lorsque je valide le formulaire. Que dois-je faire ?",
+    answer:
+      "Assurez-vous que l'orthographe des informations renseignées est correcte. Si besoin, contactez votre administrateur.",
   },
 ];
 export default function FAQ() {
