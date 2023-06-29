@@ -94,7 +94,6 @@ export default function EditPwUser({
             id="password"
             placeholder="••••••••"
             required=""
-            // value={target.value}
             onChange={(e) => setVerifPw(e.target.value)}
             onBlur={formik.handleBlur}
             className={styles.input}
