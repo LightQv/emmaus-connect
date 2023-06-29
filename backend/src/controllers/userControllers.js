@@ -49,6 +49,25 @@ const edit = (req, res) => {
       res.sendStatus(500);
     });
 };
+const editPassword = (req, res) => {
+  const user = req.body;
+
+  user.id = parseInt(req.params.id, 10);
+
+  models.user
+    .updatePassword(user)
+    .then(([result]) => {
+      if (result.affectedRows === 0) {
+        res.status(404).send("User not found");
+      } else {
+        res.sendStatus(204);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+};
 
 const add = (req, res) => {
   const newuser = req.body;
@@ -85,6 +104,7 @@ module.exports = {
   browse,
   read,
   edit,
+  editPassword,
   add,
   destroy,
 };

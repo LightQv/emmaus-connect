@@ -31,7 +31,7 @@
 }
 .form input,
 .form select {
-  background-color: var(--grey);
+  background-color: var(--quad-color);
   margin: 0 0.5rem 0 0;
   padding: 1rem;
   border-radius: 10px;
