@@ -1,0 +1,32 @@
+.page{
+  margin: 3rem 2rem;
+  color: var(--main-color-dark);
+}
+.page h2 {
+  font-family: var(--action-font);
+  font-size: xx-large;
+  margin: 2rem 0;
+}
+.cardForm {
+  width: 40%;
+}
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+.formGrid > div {
+  display: flex;
+  flex-direction: column;
+}
+.form input {
+  background-color: var(--grey);
+  margin: 0 0.5rem 0 0;
+  padding: 1rem;
+  border-radius: 10px;
+}
+.sendButton {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+}
