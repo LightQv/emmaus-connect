@@ -1,11 +1,19 @@
 import { useFormik } from "formik";
+import { useState } from "react";
 import style from "./Calculator.module.css";
 import { formSchema } from "../services/validators";
 import { useCalcContext } from "../contexts/CalcContext";
+import ScoreChart from "../components/ScoreChart";
 
 export default function Calculator() {
   const { brands, models, rams, storages, colors, states, screens, networks } =
     useCalcContext();
+  const [isCalculated, setIsCalculated] = useState(false);
+  const [results, setResults] = useState({
+    categorie: "",
+    value: "",
+    price: "",
+  });
 
   const formik = useFormik({
     initialValues: {
@@ -20,9 +28,11 @@ export default function Calculator() {
     },
 
     validationSchema: formSchema,
-    /* onSubmit: async (values) => {
+    onSubmit: async (values) => {
       // calculator
-    }, */
+      setIsCalculated(true);
+      setResults({ categorie: "4-B", value: 12, price: 10.0 });
+    },
   });
   if (
     !brands ||
@@ -41,7 +51,7 @@ export default function Calculator() {
       <div className={style.empty} />
       <div className={style.content}>
         <h2>Calculer l'indice d'un smartphone</h2>
-        <div>
+        <div className={style.pageContent}>
           <div className={style.cardForm}>
             <div className={style.form}>
               <form className={style.formGrid} onSubmit={formik.handleSubmit}>
@@ -50,7 +60,7 @@ export default function Calculator() {
                   <input
                     type="text"
                     name="brand"
-                    placeholder="ex: Apple"
+                    placeholder="Ex: Apple"
                     value={formik.values.brands}
                     onChange={formik.handleChange}
                   />
@@ -60,7 +70,7 @@ export default function Calculator() {
                   <input
                     type="text"
                     name="model"
-                    placeholder="ex: Iphone 12"
+                    placeholder="Ex: Iphone 12"
                     value={formik.values.models}
                     onChange={formik.handleChange}
                   />
@@ -172,6 +182,16 @@ export default function Calculator() {
               </form>
             </div>
           </div>
+          {isCalculated && (
+            <div className={`${style.chartShow} ${isCalculated && `active`}`}>
+              {/* <div className={isCalculated ? style.chartShow : style.chartHidden}> */}
+              <ScoreChart
+                categorie={results.categorie}
+                value={results.value}
+                price={results.price}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>

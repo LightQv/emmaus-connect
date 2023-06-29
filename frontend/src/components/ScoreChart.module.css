@@ -1,0 +1,42 @@
+.chartContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.chartBox {
+  height: 14rem;
+  width: 14rem;
+  font-weight: bold;
+}
+
+.categorieName,
+.categorieGrade {
+  color: white;
+}
+
+.categorieName {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.categorieGrade {
+  font-size: 3rem;
+}
+
+.priceBox {
+  text-align: center;
+}
+
+.priceTitle {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.price {
+  font-size: 3rem;
+}
