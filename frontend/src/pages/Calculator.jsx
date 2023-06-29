@@ -64,52 +64,6 @@ export default function Calculator() {
     }
   }, [resultIndex]);
 
-  const [inputValueBrand, setInputValueBrand] = useState("");
-  const [suggestionsBrand, setSuggestionsBrand] = useState([]);
-
-  const handleInputChangeBrand = (event) => {
-    const data = event.target.value;
-    setInputValueBrand(data);
-    const marque = [];
-
-    for (let i = 0; i < brands.length; i += 1) {
-      marque.push(brands[i].name);
-    }
-
-    // Filtre les suggestions en fonction de la valeur de l'entrée
-    const filteredSuggestions = marque.filter((marque2) =>
-      marque2.toLowerCase().includes(data.toLowerCase())
-    );
-
-    setSuggestionsBrand(filteredSuggestions);
-  };
-  const [inputValueModel, setInputValueModel] = useState("");
-  const [suggestionsModel, setSuggestionsModel] = useState([]);
-
-  const handleInputChangeModel = (event) => {
-    const data = event.target.value;
-    setInputValueModel(data);
-    const marque3 = [];
-
-    for (let i = 0; i < brands.length; i += 1) {
-      marque3.push(models[i].name);
-    }
-
-    // Filtre les suggestions en fonction de la valeur de l'entrée
-    const filteredSuggestions = marque3.filter((marque2) =>
-      marque2.toLowerCase().includes(data.toLowerCase())
-    );
-
-    setSuggestionsModel(filteredSuggestions);
-  };
-  const handleSuggestionClickBrand = (suggestion) => {
-    setInputValueBrand(suggestion);
-    setSuggestionsBrand([]);
-  };
-  const handleSuggestionClickModel = (suggestion) => {
-    setInputValueModel(suggestion);
-    setSuggestionsModel([]);
-  };
   const formik = useFormik({
     initialValues: {
       brand: "",
@@ -124,14 +78,14 @@ export default function Calculator() {
     validationSchema: formSchema,
     onSubmit: (values) => {
       /* --- updating the object containing the values need for calculation with the specs enter by the user --- */
-      brands.forEach((brand) => {
-        if (values.brand === brand.name) {
-          calcValues.coef.brand = parseFloat(brand.coef);
+      brands.forEach((el) => {
+        if (values.brand === el.name) {
+          calcValues.coef.brand = parseFloat(el.coef);
         }
       });
-      models.forEach((model) => {
-        if (values.model === model.name) {
-          calcValues.coef.model = parseFloat(model.coef);
+      models.forEach((el) => {
+        if (values.model === el.name) {
+          calcValues.coef.model = parseFloat(el.coef);
         }
       });
       rams.forEach((ram) => {
@@ -212,41 +166,19 @@ export default function Calculator() {
                   <label htmlFor="brand">Marque</label>
                   <input
                     type="text"
-                    value={inputValueBrand}
-                    onChange={handleInputChangeBrand}
+                    name="brand"
+                    value={formik.values.brands}
+                    onChange={formik.handleChange}
                   />
-                  <ul>
-                    {suggestionsBrand.map((brand) => (
-                      <li key={brand}>
-                        <button
-                          type="button"
-                          onClick={() => handleSuggestionClickBrand(brand)}
-                        >
-                          {brand}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
                 <div>
                   <label htmlFor="model">Modèle</label>
                   <input
                     type="text"
-                    value={inputValueModel}
-                    onChange={handleInputChangeModel}
+                    name="model"
+                    value={formik.values.models}
+                    onChange={formik.handleChange}
                   />
-                  <ul>
-                    {suggestionsModel.map((model) => (
-                      <li key={model}>
-                        <button
-                          type="button"
-                          onClick={() => handleSuggestionClickModel(model)}
-                        >
-                          {model}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
                 <div>
                   <label htmlFor="ram">RAM</label>
