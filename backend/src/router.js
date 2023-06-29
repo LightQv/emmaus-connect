@@ -47,8 +47,12 @@ router.post(
   upload.single("network"),
   networkControllers.importTable
 );
-router.get("/api/price", priceControllers.browse);
-router.post("/api/price", upload.single("price"), priceControllers.importTable);
+router.get("/api/price_index", priceControllers.browse);
+router.post(
+  "/api/price_index",
+  upload.single("price"),
+  priceControllers.importTable
+);
 router.get("/api/ram", ramControllers.browse);
 router.post("/api/ram", upload.single("ram"), ramControllers.importTable);
 router.get("/api/screen", screenControllers.browse);

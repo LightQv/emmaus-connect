@@ -5,7 +5,7 @@ export default function Parameters() {
   return (
     <div className={styles.page}>
       <div className={styles.empty} />
-      <ParametersForm />;
+      <ParametersForm />
     </div>
   );
 }
