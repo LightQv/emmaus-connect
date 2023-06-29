@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import RequireAuth from "./components/routes/RequireAuth";
 import Login from "./pages/Login";
-// import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar";
 import Calculator from "./pages/Calculator";
 import FAQ from "./pages/FAQ";
 import Parameters from "./pages/Parameters";
@@ -11,8 +11,13 @@ import logo from "./assets/images/emmaus.svg";
 
 function App() {
   return (
-    <div className="App" style={{ backgroundImage: `url(${logo})` }}>
-      {/* <Navbar /> */}
+    <div
+      className="App"
+      style={{ backgroundImage: `url(${logo})` }}
+      div
+      className="App"
+    >
+      <Navbar />
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<Login />} />
