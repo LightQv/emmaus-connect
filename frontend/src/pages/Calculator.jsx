@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useFormik } from "formik";
 import style from "./Calculator.module.css";
 import { formSchema } from "../services/validators";
@@ -6,6 +7,24 @@ import { useCalcContext } from "../contexts/CalcContext";
 export default function Calculator() {
   const { brands, models, rams, storages, colors, states, screens, networks } =
     useCalcContext();
+  const [resultIndex, setResultIndex] = useState();
+
+  const calcValues = {
+    coef: {
+      brand: 0,
+      model: 0,
+      color: 0,
+    },
+    value: {
+      ram: 0,
+      storage: 0,
+      network: 0,
+      screen: 0,
+    },
+    weighting: {
+      state: 0,
+    },
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -20,10 +39,67 @@ export default function Calculator() {
     },
 
     validationSchema: formSchema,
-    /* onSubmit: async (values) => {
-      // calculator
-    }, */
+    onSubmit: (values) => {
+      brands.forEach((brand) => {
+        if (values.brand === brand.name) {
+          calcValues.coef.brand = parseFloat(brand.coef);
+        }
+      });
+      models.forEach((model) => {
+        if (values.model === model.name) {
+          calcValues.coef.model = parseFloat(model.coef);
+        }
+      });
+      rams.forEach((ram) => {
+        if (parseInt(values.ram, 10) === parseInt(ram.capacity, 10)) {
+          calcValues.value.ram = ram.value;
+        }
+      });
+      storages.forEach((storage) => {
+        if (parseInt(values.storage, 10) === parseInt(storage.capacity, 10)) {
+          calcValues.value.storage = storage.value;
+        }
+      });
+      colors.forEach((color) => {
+        if (values.color === color.name) {
+          calcValues.coef.color = parseFloat(color.coef);
+        }
+      });
+      states.forEach((state) => {
+        if (values.state === state.state) {
+          calcValues.weighting.state = state.weighting;
+        }
+      });
+      screens.forEach((screen) => {
+        if (parseInt(values.screen, 10) === parseInt(screen.size, 10)) {
+          calcValues.value.screen = screen.value;
+        }
+      });
+      networks.forEach((network) => {
+        if (values.network === network.name) {
+          calcValues.value.network = network.value;
+        }
+      });
+
+      /* --- calculate the value --- */
+      const value =
+        calcValues.value.ram +
+        calcValues.value.storage +
+        calcValues.value.network +
+        calcValues.value.screen;
+      /* --- calculate the coefficient --- */
+      const coef =
+        calcValues.coef.brand * calcValues.coef.model * calcValues.coef.color;
+      /* --- multiply the value with the coefficient --- */
+      const interValue = value * coef;
+      /* --- calculate the percentage depending on the state of the smartphone --- */
+      const weight = interValue * (calcValues.weighting.state / 100);
+      /* --- calculate the result --- */
+      const result = interValue + weight;
+      setResultIndex(result);
+    },
   });
+
   if (
     !brands ||
     !models ||
@@ -42,6 +118,7 @@ export default function Calculator() {
       <div className={style.content}>
         <h2>Calculer l'indice d'un smartphone</h2>
         <div>
+          <div>{resultIndex}</div>
           <div className={style.cardForm}>
             <div className={style.form}>
               <form className={style.formGrid} onSubmit={formik.handleSubmit}>
