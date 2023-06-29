@@ -6,20 +6,10 @@ import styles from "./Dropzone.module.css";
 function Dropzone({ parameter }) {
   const inputRef = useRef({ parameter });
 
-  // const dropHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log(e.target.name);
-  // };
-  // const onDragOverHandler = (e) => {
-  //   e.preventDefault();
-  //   console.log(e.target.name);
-  // };
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append(parameter, inputRef.current.files[0]);
-    // console.log(inputRef.current.files[0]);
     axios.post(`${import.meta.env.VITE_BACKEND_URL}/${parameter}`, formData);
     e.target.reset();
   };

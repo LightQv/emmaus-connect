@@ -30,7 +30,6 @@ pool.getConnection().catch(() => {
 
 const models = {};
 
-const ItemManager = require("./ItemManager");
 const BrandManager = require("./BrandManager");
 const CategoriesManager = require("./CategoriesManager");
 const ColourManager = require("./ColourManager");
@@ -42,8 +41,6 @@ const ScreenManager = require("./ScreenManager");
 const StateManager = require("./StateManager");
 const StorageManager = require("./StorageManager");
 
-models.item = new ItemManager();
-models.item.setDatabase(pool);
 models.brand = new BrandManager();
 models.brand.setDatabase(pool);
 models.categories = new CategoriesManager();

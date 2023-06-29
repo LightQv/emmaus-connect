@@ -5,7 +5,6 @@ const upload = multer({ dest: "../public/uploads/" });
 
 const router = express.Router();
 
-const itemControllers = require("./controllers/itemControllers");
 const brandControllers = require("./controllers/brandControllers");
 const categoriesControllers = require("./controllers/categoriesControllers");
 const colourControllers = require("./controllers/colourControllers");
@@ -17,41 +16,43 @@ const screenControllers = require("./controllers/screenControllers");
 const stateControllers = require("./controllers/stateControllers");
 const storageControllers = require("./controllers/storageControllers");
 
-router.get("/items", itemControllers.browse);
-router.get("/items/:id", itemControllers.read);
-router.put("/items/:id", itemControllers.edit);
-router.post("/items", itemControllers.add);
-router.delete("/items/:id", itemControllers.destroy);
-
-router.get("/brand", brandControllers.browse);
-router.post("/brand", upload.single("brand"), brandControllers.importTable);
-router.get("/categories", categoriesControllers.browse);
+router.get("/api/brand", brandControllers.browse);
+router.post("/api/brand", upload.single("brand"), brandControllers.importTable);
+router.get("/api/categories", categoriesControllers.browse);
 router.post(
-  "/categories",
+  "/api/categories",
   upload.single("categories"),
   categoriesControllers.importTable
 );
-router.get("/colour", colourControllers.browse);
-router.post("/colour", upload.single("colour"), colourControllers.importTable);
-router.get("/model", modelControllers.browse);
-router.post("/model", upload.single("model"), modelControllers.importTable);
-router.get("/network", networkControllers.browse);
+router.get("/api/colour", colourControllers.browse);
 router.post(
-  "/network",
+  "/api/colour",
+  upload.single("colour"),
+  colourControllers.importTable
+);
+router.get("/api/model", modelControllers.browse);
+router.post("/api/model", upload.single("model"), modelControllers.importTable);
+router.get("/api/network", networkControllers.browse);
+router.post(
+  "/api/network",
   upload.single("network"),
   networkControllers.importTable
 );
-router.get("/price", priceControllers.browse);
-router.post("/price", upload.single("price"), priceControllers.importTable);
-router.get("/ram", ramControllers.browse);
-router.post("/ram", upload.single("ram"), ramControllers.importTable);
-router.get("/screen", screenControllers.browse);
-router.post("/screen", upload.single("screen"), screenControllers.importTable);
-router.get("/state", stateControllers.browse);
-router.post("/state", upload.single("state"), stateControllers.importTable);
-router.get("/storage", storageControllers.browse);
+router.get("/api/price", priceControllers.browse);
+router.post("/api/price", upload.single("price"), priceControllers.importTable);
+router.get("/api/ram", ramControllers.browse);
+router.post("/api/ram", upload.single("ram"), ramControllers.importTable);
+router.get("/api/screen", screenControllers.browse);
 router.post(
-  "/storage",
+  "/api/screen",
+  upload.single("screen"),
+  screenControllers.importTable
+);
+router.get("/api/state", stateControllers.browse);
+router.post("/api/state", upload.single("state"), stateControllers.importTable);
+router.get("/api/storage", storageControllers.browse);
+router.post(
+  "/api/storage",
   upload.single("storage"),
   storageControllers.importTable
 );
