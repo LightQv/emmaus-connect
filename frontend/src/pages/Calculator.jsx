@@ -20,9 +20,9 @@ export default function Calculator() {
 
     validationSchema: formSchema,
 
-    onSubmit: async (values) => {
+    /* onSubmit: async (values) => {
       // calculator
-    },
+    }, */
   });
   if (!brands) return null;
   return (
