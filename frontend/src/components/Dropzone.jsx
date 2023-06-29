@@ -1,9 +1,8 @@
 import React, { useRef } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-// import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import Tooltip from "@mui/material/Tooltip";
-// import { styled } from "@mui/material/styles";
+import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
 import styles from "./Dropzone.module.css";
 import button from "../assets/icons/bouton.svg";
 import info from "../assets/icons/info.png";
@@ -74,17 +73,19 @@ function Dropzone({ parameter, setNotification }) {
     tooltip = `Chaque ligne du fichier .csv doit être au format 'Indice' (ex: '0.25')`;
   }
 
-  // const HtmlTooltip = styled(({ className, ...props }) => (
-  //   <Tooltip {...props} classes={{ popper: className }} />
-  // ))(({ theme }) => ({
-  //   [`& .${tooltipClasses.tooltip}`]: {
-  //     backgroundColor: "#f5f5f9",
-  //     color: "rgba(0, 0, 0, 0.87)",
-  //     maxWidth: 220,
-  //     fontSize: theme.typography.pxToRem(12),
-  //     border: "1px solid #dadde9",
-  //   },
-  // }));
+  const HtmlTooltip = styled(({ className, ...props }) => (
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))(({ theme }) => ({
+    [`& .${tooltipClasses.tooltip}`]: {
+      backgroundColor: "#ffcc38",
+      color: "#002743",
+      maxWidth: 220,
+      fontSize: theme.typography.pxToRem(15),
+      border: "1px solid #dadde9",
+      borderRadius: "10px",
+    },
+  }));
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -117,9 +118,9 @@ function Dropzone({ parameter, setNotification }) {
     >
       <label className={styles.label} htmlFor={parameter}>
         <p>
-          <Tooltip title={tooltip} placement="top">
+          <HtmlTooltip title={tooltip} placement="top">
             <img src={info} className={styles.info} alt="info" />
-          </Tooltip>
+          </HtmlTooltip>
           {` ${label} :`}
         </p>
         <div className={styles.inputs}>
