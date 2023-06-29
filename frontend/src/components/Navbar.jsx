@@ -47,6 +47,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     isActive ? `${styles.active} ${styles.link}` : styles.link
                   }
+                  style={{ justifyContent: "flex-end" }}
                 >
                   {el.name}
                 </NavLink>

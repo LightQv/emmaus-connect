@@ -26,13 +26,13 @@ function Dropzone({ parameter, setNotification }) {
     label = "Couleur";
   }
   if (parameter === "state") {
-    label = "Etat";
+    label = "État";
   }
   if (parameter === "network") {
     label = "Réseau";
   }
   if (parameter === "screen") {
-    label = "Ecran";
+    label = "Écran";
   }
   if (parameter === "categories") {
     label = "Catégories";
@@ -78,8 +78,8 @@ function Dropzone({ parameter, setNotification }) {
     <Tooltip {...props} classes={{ popper: className }} />
   ))(({ theme }) => ({
     [`& .${tooltipClasses.tooltip}`]: {
-      backgroundColor: "#ffcc38",
-      color: "#002743",
+      backgroundColor: "var(--secondary-color)",
+      color: "white",
       maxWidth: 220,
       fontSize: theme.typography.pxToRem(15),
       border: "1px solid #002743",
@@ -116,13 +116,15 @@ function Dropzone({ parameter, setNotification }) {
       encType="multipart/form-data"
       onSubmit={(e) => handleSubmit(e)}
     >
-      <label className={styles.label} htmlFor={parameter}>
-        <p>
-          <HtmlTooltip title={tooltip} placement="top">
-            <img src={info} className={styles.info} alt="info" />
-          </HtmlTooltip>
-          {` ${label} :`}
-        </p>
+      <div className={styles.labelBox}>
+        <label className={styles.label} htmlFor={parameter}>
+          {label}
+        </label>
+        <HtmlTooltip title={tooltip} placement="top">
+          <img src={info} className={styles.info} alt="info" />
+        </HtmlTooltip>
+      </div>
+      <div className={styles.inputBox}>
         <div className={styles.inputs}>
           <input
             ref={inputRef}
@@ -131,11 +133,11 @@ function Dropzone({ parameter, setNotification }) {
             accept=".csv"
             name={parameter}
           />
-          <button className={styles.button} type="submit">
-            <img className={styles.buttonImg} src={button} alt="" />
-          </button>
         </div>
-      </label>
+        <button className={styles.button} type="submit">
+          <img className={styles.buttonImg} src={button} alt="" />
+        </button>
+      </div>
     </form>
   );
 }
