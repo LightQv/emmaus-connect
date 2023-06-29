@@ -12,6 +12,7 @@ const pool = mysql.createPool({
   user: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
+  multipleStatements: true,
 });
 
 // try a connection
@@ -29,15 +30,40 @@ pool.getConnection().catch(() => {
 
 const models = {};
 
+const BrandManager = require("./BrandManager");
+const CategoriesManager = require("./CategoriesManager");
+const ColourManager = require("./ColourManager");
+const ModelManager = require("./ModelManager");
+const NetworkManager = require("./NetworkManager");
+const PriceManager = require("./PriceManager");
+const RamManager = require("./RamManager");
+const ScreenManager = require("./ScreenManager");
+const StateManager = require("./StateManager");
+const StorageManager = require("./StorageManager");
 const UserManager = require("./UserManager");
 
 models.user = new UserManager();
 models.user.setDatabase(pool);
-
-const ItemManager = require("./ItemManager");
-
-models.item = new ItemManager();
-models.item.setDatabase(pool);
+models.brand = new BrandManager();
+models.brand.setDatabase(pool);
+models.categories = new CategoriesManager();
+models.categories.setDatabase(pool);
+models.colour = new ColourManager();
+models.colour.setDatabase(pool);
+models.model = new ModelManager();
+models.model.setDatabase(pool);
+models.network = new NetworkManager();
+models.network.setDatabase(pool);
+models.price = new PriceManager();
+models.price.setDatabase(pool);
+models.ram = new RamManager();
+models.ram.setDatabase(pool);
+models.screen = new ScreenManager();
+models.screen.setDatabase(pool);
+models.state = new StateManager();
+models.state.setDatabase(pool);
+models.storage = new StorageManager();
+models.storage.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model

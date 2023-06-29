@@ -17,6 +17,7 @@ function App() {
         {/* Public routes */}
         <Route path="/" element={<Login />} />
         <Route path="/calc" element={<Calculator />} />
+
         <Route path="/faq" element={<FAQ />} />
 
         {/* Admin routes */}

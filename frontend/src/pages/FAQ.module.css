@@ -26,6 +26,7 @@
   font-family: var(--action-font);
   color: var(--main-color-dark);
   font-size: xx-large;
+  color: var(--main-color-dark);
 }
 
 .accordionFaq .inactive {
@@ -38,6 +39,7 @@
   background-color: var(--main-color);
   border-radius: 10px;
   padding: 10px;
+  width: 80%;
 }
 
 .active {
@@ -74,12 +76,12 @@
   .button img {
     height: 20px;
   }
-  .card {
+  .page {
     margin: 3rem 1rem;
     color: var(--main-color-dark);
     overflow: scroll;
   }
-  .card h2 {
+  .page h2 {
     font-family: var(--action-font);
     font-size: x-large;
   }
