@@ -1,59 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import style from "./Calculator.module.css";
 import { formSchema } from "../services/validators";
 import { useCalcContext } from "../contexts/CalcContext";
 
 export default function Calculator() {
-  const { brands, models, rams, storages, colors, states, screens, networks } =
-    useCalcContext();
+  const {
+    brands,
+    models,
+    rams,
+    storages,
+    colors,
+    states,
+    screens,
+    networks,
+    priceIndexes,
+    categories,
+  } = useCalcContext();
+  const [resultIndex, setResultIndex] = useState();
+  const [resultCategory, setResultCategory] = useState();
+  const [resultPrice, setResultPrice] = useState();
 
-  const [inputValueBrand, setInputValueBrand] = useState("");
-  const [suggestionsBrand, setSuggestionsBrand] = useState([]);
+  /* --- object containing the values needed for calculating the index --- */
+  const calcValues = {
+    coef: {
+      brand: 0,
+      model: 0,
+      color: 0,
+    },
+    value: {
+      ram: 0,
+      storage: 0,
+      network: 0,
+      screen: 0,
+    },
+    weighting: {
+      state: 0,
+    },
+  };
 
-  const handleInputChangeBrand = (event) => {
-    const data = event.target.value;
-    setInputValueBrand(data);
-    const marque = [];
+  /* --- calculate the final category for the smartphone --- */
+  const findCategory = () => {
+    categories.forEach((cat) => {
+      if (
+        Math.round(resultIndex) >= cat.val_min &&
+        Math.round(resultIndex) <= cat.val_max
+      ) {
+        setResultCategory(cat.name);
+      }
+    });
+  };
 
-    for (let i = 0; i < brands.length; i += 1) {
-      marque.push(brands[i].name);
+  /* --- calculate the final price for the smartphone --- */
+  const findPrice = () => {
+    setResultPrice(Math.round(resultIndex * parseFloat(priceIndexes[0].price)));
+  };
+
+  /* --- find the category and the price once the index is calculated --- */
+  useEffect(() => {
+    if (resultIndex) {
+      findCategory();
+      findPrice();
     }
+  }, [resultIndex]);
 
-    // Filtre les suggestions en fonction de la valeur de l'entrée
-    const filteredSuggestions = marque.filter((marque2) =>
-      marque2.toLowerCase().includes(data.toLowerCase())
-    );
-
-    setSuggestionsBrand(filteredSuggestions);
-  };
-  const [inputValueModel, setInputValueModel] = useState("");
-  const [suggestionsModel, setSuggestionsModel] = useState([]);
-
-  const handleInputChangeModel = (event) => {
-    const data = event.target.value;
-    setInputValueModel(data);
-    const marque3 = [];
-
-    for (let i = 0; i < brands.length; i += 1) {
-      marque3.push(models[i].name);
-    }
-
-    // Filtre les suggestions en fonction de la valeur de l'entrée
-    const filteredSuggestions = marque3.filter((marque2) =>
-      marque2.toLowerCase().includes(data.toLowerCase())
-    );
-
-    setSuggestionsModel(filteredSuggestions);
-  };
-  const handleSuggestionClickBrand = (suggestion) => {
-    setInputValueBrand(suggestion);
-    setSuggestionsBrand([]);
-  };
-  const handleSuggestionClickModel = (suggestion) => {
-    setInputValueModel(suggestion);
-    setSuggestionsModel([]);
-  };
   const formik = useFormik({
     initialValues: {
       brand: "",
@@ -65,12 +75,69 @@ export default function Calculator() {
       screen: "",
       network: "",
     },
-
     validationSchema: formSchema,
-    /* onSubmit: async (values) => {
-      // calculator
-    }, */
+    onSubmit: (values) => {
+      /* --- updating the object containing the values need for calculation with the specs enter by the user --- */
+      brands.forEach((el) => {
+        if (values.brand === el.name) {
+          calcValues.coef.brand = parseFloat(el.coef);
+        }
+      });
+      models.forEach((el) => {
+        if (values.model === el.name) {
+          calcValues.coef.model = parseFloat(el.coef);
+        }
+      });
+      rams.forEach((ram) => {
+        if (parseInt(values.ram, 10) === parseInt(ram.capacity, 10)) {
+          calcValues.value.ram = ram.value;
+        }
+      });
+      storages.forEach((storage) => {
+        if (parseInt(values.storage, 10) === parseInt(storage.capacity, 10)) {
+          calcValues.value.storage = storage.value;
+        }
+      });
+      colors.forEach((color) => {
+        if (values.color === color.name) {
+          calcValues.coef.color = parseFloat(color.coef);
+        }
+      });
+      states.forEach((state) => {
+        if (values.state === state.state) {
+          calcValues.weighting.state = state.weighting;
+        }
+      });
+      screens.forEach((screen) => {
+        if (parseInt(values.screen, 10) === parseInt(screen.size, 10)) {
+          calcValues.value.screen = screen.value;
+        }
+      });
+      networks.forEach((network) => {
+        if (values.network === network.name) {
+          calcValues.value.network = network.value;
+        }
+      });
+
+      /* --- calculate the value --- */
+      const value =
+        calcValues.value.ram +
+        calcValues.value.storage +
+        calcValues.value.network +
+        calcValues.value.screen;
+      /* --- calculate the coefficient --- */
+      const coef =
+        calcValues.coef.brand * calcValues.coef.model * calcValues.coef.color;
+      /* --- multiply the value with the coefficient --- */
+      const interValue = value * coef;
+      /* --- calculate the percentage depending on the state of the smartphone --- */
+      const weight = interValue * (calcValues.weighting.state / 100);
+      /* --- calculate the result --- */
+      const result = interValue + weight;
+      setResultIndex(result);
+    },
   });
+
   if (
     !brands ||
     !models ||
@@ -89,6 +156,9 @@ export default function Calculator() {
       <div className={style.content}>
         <h2>Calculer l'indice d'un smartphone</h2>
         <div>
+          {resultCategory && resultPrice ? (
+            <div>{`Catégorie : ${resultCategory} | Prix : ${resultPrice}`}</div>
+          ) : null}
           <div className={style.cardForm}>
             <div className={style.form}>
               <form className={style.formGrid} onSubmit={formik.handleSubmit}>
@@ -96,41 +166,19 @@ export default function Calculator() {
                   <label htmlFor="brand">Marque</label>
                   <input
                     type="text"
-                    value={inputValueBrand}
-                    onChange={handleInputChangeBrand}
+                    name="brand"
+                    value={formik.values.brands}
+                    onChange={formik.handleChange}
                   />
-                  <ul>
-                    {suggestionsBrand.map((brand) => (
-                      <li key={brand}>
-                        <button
-                          type="button"
-                          onClick={() => handleSuggestionClickBrand(brand)}
-                        >
-                          {brand}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
                 <div>
                   <label htmlFor="model">Modèle</label>
                   <input
                     type="text"
-                    value={inputValueModel}
-                    onChange={handleInputChangeModel}
+                    name="model"
+                    value={formik.values.models}
+                    onChange={formik.handleChange}
                   />
-                  <ul>
-                    {suggestionsModel.map((model) => (
-                      <li key={model}>
-                        <button
-                          type="button"
-                          onClick={() => handleSuggestionClickModel(model)}
-                        >
-                          {model}
-                        </button>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
                 <div>
                   <label htmlFor="ram">RAM</label>

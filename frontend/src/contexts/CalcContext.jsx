@@ -15,6 +15,8 @@ export function CalcContextProvider({ children }) {
   const [states, setStates] = useState();
   const [screens, setScreens] = useState();
   const [networks, setNetworks] = useState();
+  const [priceIndexes, setPriceIndexes] = useState();
+  const [categories, setCategories] = useState();
 
   const data = async () => {
     try {
@@ -57,6 +59,16 @@ export function CalcContextProvider({ children }) {
       if (network) {
         setNetworks(network.data);
       } else throw new Error();
+
+      const priceIndex = await APIService.get("/price_index");
+      if (priceIndex) {
+        setPriceIndexes(priceIndex.data);
+      } else throw new Error();
+
+      const category = await APIService.get("/categories");
+      if (category) {
+        setCategories(category.data);
+      } else throw new Error();
     } catch (error) {
       console.error(error);
     }
@@ -83,8 +95,23 @@ export function CalcContextProvider({ children }) {
       setScreens,
       networks,
       setNetworks,
+      priceIndexes,
+      setPriceIndexes,
+      categories,
+      setCategories,
     };
-  }, [brands, models, rams, storages, colors, states, screens, networks]);
+  }, [
+    brands,
+    models,
+    rams,
+    storages,
+    colors,
+    states,
+    screens,
+    networks,
+    priceIndexes,
+    categories,
+  ]);
 
   return <CalcContext.Provider value={memo}>{children}</CalcContext.Provider>;
 }
