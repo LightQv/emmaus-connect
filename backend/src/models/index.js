@@ -35,9 +35,33 @@ models.user = new UserManager();
 models.user.setDatabase(pool);
 
 const ItemManager = require("./ItemManager");
+const BrandManager = require("./BrandManager");
+const ColourManager = require("./ColourManager");
+const ModelManager = require("./ModelManager");
+const NetworkManager = require("./NetworkManager");
+const RamManager = require("./RamManager");
+const ScreenManager = require("./ScreenManager");
+const StateManager = require("./StateManager");
+const StorageManager = require("./StorageManager");
 
 models.item = new ItemManager();
 models.item.setDatabase(pool);
+models.brand = new BrandManager();
+models.brand.setDatabase(pool);
+models.colour = new ColourManager();
+models.colour.setDatabase(pool);
+models.model = new ModelManager();
+models.model.setDatabase(pool);
+models.network = new NetworkManager();
+models.network.setDatabase(pool);
+models.ram = new RamManager();
+models.ram.setDatabase(pool);
+models.screen = new ScreenManager();
+models.screen.setDatabase(pool);
+models.state = new StateManager();
+models.state.setDatabase(pool);
+models.storage = new StorageManager();
+models.storage.setDatabase(pool);
 
 // bonus: use a proxy to personalize error message,
 // when asking for a non existing model
