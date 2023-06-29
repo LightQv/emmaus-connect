@@ -1,8 +1,8 @@
 const AbstractManager = require("./AbstractManager");
 
-class ScreenManager extends AbstractManager {
+class PriceManager extends AbstractManager {
   constructor() {
-    super({ table: "screen" });
+    super({ table: "price_index" });
   }
 
   insert(item) {
@@ -20,10 +20,10 @@ class ScreenManager extends AbstractManager {
 
   insertAll(csvData) {
     return this.database.query(
-      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (size, value) VALUES ?`,
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (price) VALUES ?`,
       [csvData]
     );
   }
 }
 
-module.exports = ScreenManager;
+module.exports = PriceManager;

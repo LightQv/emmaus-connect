@@ -1,0 +1,38 @@
+.formLine {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 1em;
+}
+
+.dropZone {
+  cursor: pointer;
+}
+
+.info {
+  width: 1em;
+}
+
+.inputs {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1em;
+  border-radius: 10px;
+  background-color: #F5F5F5;
+  padding: 1em 0.7em;
+}
+
+.buttonImg {
+  cursor: pointer;
+  height: 3em;
+}
+
+.button {
+  height: fit-content;
+  width: fit-content;
+  padding: none;
+}

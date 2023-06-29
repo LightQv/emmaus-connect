@@ -17,6 +17,13 @@ class RamManager extends AbstractManager {
       [item.title, item.id]
     );
   }
+
+  insertAll(csvData) {
+    return this.database.query(
+      `TRUNCATE ${this.table}; INSERT INTO ${this.table} (capacity, value) VALUES ?`,
+      [csvData]
+    );
+  }
 }
 
 module.exports = RamManager;
