@@ -8,6 +8,7 @@ import styles from "./ScoreChart.module.css";
 
 export default function ScoreChart({ categorie, price }) {
   const percentage = () => {
+    if (categorie === "HC") return 0;
     if (categorie === "C") return 25;
     if (categorie === "B") return 50;
     if (categorie === "A") return 75;

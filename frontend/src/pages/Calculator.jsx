@@ -60,7 +60,7 @@ export default function Calculator() {
 
   /* --- find the category and the price once the index is calculated --- */
   useEffect(() => {
-    if (resultIndex) {
+    if (resultIndex >= 0) {
       findCategory();
       findPrice();
     }
