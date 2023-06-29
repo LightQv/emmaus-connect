@@ -91,7 +91,7 @@ const importTable = (req, res) => {
   const csvData = [];
   const csvStream = fastcsv
     .parse()
-    .on("data", function (data) {
+    .on("data", (data) => {
       // console.log("data =", data);
       csvData.push(data);
       // console.log(csvData);
