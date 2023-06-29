@@ -10,6 +10,10 @@
   cursor: pointer;
 }
 
+.info {
+  width: 1em;
+}
+
 .inputs {
   width: 100%;
   height: fit-content;
