@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `emmaus_connect`.`categories` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-INSERT INTO categories (name, val_min, val_max) VALUES ("C", 0, 200), ("B", 201, 279), ("A", 280, 374), ("S", 375, 999);
+INSERT INTO categories (name, val_min, val_max) VALUES ("HC", 0, 0), ("C", 1, 200), ("B", 201, 279), ("A", 280, 374), ("S", 375, 999);
 -- -----------------------------------------------------
 -- Table `emmaus_connect`.`price_index`
 -- -----------------------------------------------------
