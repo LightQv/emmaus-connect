@@ -82,7 +82,7 @@ function Dropzone({ parameter, setNotification }) {
       color: "#002743",
       maxWidth: 220,
       fontSize: theme.typography.pxToRem(15),
-      border: "1px solid #dadde9",
+      border: "1px solid #002743",
       borderRadius: "10px",
     },
   }));
