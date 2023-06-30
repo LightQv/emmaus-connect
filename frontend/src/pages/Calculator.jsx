@@ -7,6 +7,8 @@ import { formSchema } from "../services/validators";
 import { useCalcContext } from "../contexts/CalcContext";
 import ScoreChart from "../components/ScoreChart";
 import { notifyError } from "../services/toasts";
+import Chat from "../components/Chat";
+import arrow from "../assets/icons/arrow.svg";
 
 export default function Calculator() {
   const {
@@ -28,6 +30,7 @@ export default function Calculator() {
   const [message, setMessage] = useState(null);
   const [suggestionsBrand, setSuggestionsBrand] = useState([]);
   const [suggestionsModel, setSuggestionsModel] = useState([]);
+  const [showChat, setShowChat] = useState(false);
 
   /* --- object containing the values needed for calculating the index --- */
   const calcValues = {
@@ -365,6 +368,14 @@ export default function Calculator() {
           )}
         </div>
       </div>
+      <button
+        type="button"
+        className={showChat ? style.arrowLeft : style.arrow}
+        onClick={() => setShowChat(!showChat)}
+      >
+        <img src={arrow} alt="arrow" />
+      </button>
+      {showChat ? <Chat /> : null}
       <ToastContainer limit={1} />
     </div>
   );

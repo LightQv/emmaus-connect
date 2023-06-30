@@ -92,7 +92,10 @@ export default function Users() {
           }
         >
           {isShow.modalAdd && (
-            <Modal component={<AddUser />} setIsShow={setIsShow} />
+            <Modal
+              component={<AddUser setIsShow={setIsShow} />}
+              setIsShow={setIsShow}
+            />
           )}
           {isShow.modalEdit && (
             <Modal
@@ -100,6 +103,7 @@ export default function Users() {
                 <EditUser
                   selectedUser={selectedUser}
                   setSelectedUser={setSelectedUser}
+                  setIsShow={setIsShow}
                 />
               }
               setIsShow={setIsShow}
@@ -111,6 +115,7 @@ export default function Users() {
                 <EditPwUser
                   selectedUser={selectedUser}
                   setSelectedUser={setSelectedUser}
+                  setIsShow={setIsShow}
                 />
               }
               setIsShow={setIsShow}
