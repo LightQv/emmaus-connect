@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { useFormik } from "formik";
+import { ToastContainer } from "react-toastify";
+import Autosuggest from "react-autosuggest";
 import style from "./Calculator.module.css";
 import { formSchema } from "../services/validators";
 import { useCalcContext } from "../contexts/CalcContext";
 import ScoreChart from "../components/ScoreChart";
+import { notifyError } from "../services/toasts";
 
 export default function Calculator() {
   const {
@@ -22,6 +25,9 @@ export default function Calculator() {
   const [resultCategory, setResultCategory] = useState();
   const [resultPrice, setResultPrice] = useState();
   const [isCalculated, setIsCalculated] = useState(false);
+  const [message, setMessage] = useState(null);
+  const [suggestionsBrand, setSuggestionsBrand] = useState([]);
+  const [suggestionsModel, setSuggestionsModel] = useState([]);
 
   /* --- object containing the values needed for calculating the index --- */
   const calcValues = {
@@ -66,6 +72,13 @@ export default function Calculator() {
     }
   }, [resultIndex]);
 
+  useEffect(() => {
+    if (message) {
+      notifyError(message);
+      setMessage(null);
+    }
+  }, [message]);
+
   const formik = useFormik({
     initialValues: {
       brand: "",
@@ -80,6 +93,13 @@ export default function Calculator() {
     validationSchema: formSchema,
     onSubmit: (values) => {
       /* --- updating the object containing the values need for calculation with the specs enter by the user --- */
+      if (!brands.some((brand) => brand.name === values.brand)) {
+        return setMessage("Cette marque n'existe pas. Vérifiez l'orthographe.");
+      }
+      if (!models.some((model) => model.name === values.model)) {
+        return setMessage("Ce modèle n'existe pas. Vérifiez l'orthographe.");
+      }
+
       brands.forEach((el) => {
         if (values.brand === el.name) {
           calcValues.coef.brand = parseFloat(el.coef);
@@ -137,10 +157,43 @@ export default function Calculator() {
       /* --- calculate the result --- */
       const result = interValue + weight;
       setResultIndex(result);
-      setIsCalculated(true);
+      return setIsCalculated(true);
     },
   });
+  const handleInputChangeBrand = (event, { newValue }) => {
+    formik.setFieldValue("brand", newValue); // Mettez à jour la valeur du champ dans formik
+  };
+  const handleInputChangeModel = (event, { newValue }) => {
+    formik.setFieldValue("model", newValue); // Mettez à jour la valeur du champ dans formik
+  };
+  const getSuggestionsBrand = (value) => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
 
+    return inputLength === 0
+      ? [] // Retourne une liste vide si la valeur est vide
+      : brands.filter(
+          (brand) =>
+            brand.name.toLowerCase().slice(0, inputLength) === inputValue
+        );
+  };
+  const getSuggestionsModel = (value) => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0
+      ? [] // Retourne une liste vide si la valeur est vide
+      : models.filter(
+          (model) =>
+            model.name.toLowerCase().slice(0, inputLength) === inputValue
+        );
+  };
+
+  // Définissez un render pour les suggestions de marque
+  const renderSuggestionBrand = (suggestion) => <span>{suggestion.name}</span>;
+
+  // Définissez un render pour les suggestions de modèle
+  const renderSuggestionModel = (suggestion) => <span>{suggestion.name}</span>;
   if (
     !brands ||
     !models ||
@@ -164,22 +217,38 @@ export default function Calculator() {
               <form className={style.formGrid} onSubmit={formik.handleSubmit}>
                 <div>
                   <label htmlFor="brand">Marque</label>
-                  <input
-                    type="text"
-                    name="brand"
-                    placeholder="Ex: Apple"
-                    value={formik.values.brands}
-                    onChange={formik.handleChange}
+                  <Autosuggest
+                    inputProps={{
+                      placeholder: "Ex: Apple",
+                      value: formik.values.brand,
+                      onChange: handleInputChangeBrand,
+                      name: "brand",
+                    }}
+                    suggestions={suggestionsBrand}
+                    onSuggestionsFetchRequested={({ value }) =>
+                      setSuggestionsBrand(getSuggestionsBrand(value))
+                    }
+                    onSuggestionsClearRequested={() => setSuggestionsBrand([])}
+                    getSuggestionValue={(suggestion) => suggestion.name}
+                    renderSuggestion={renderSuggestionBrand}
                   />
                 </div>
                 <div>
                   <label htmlFor="model">Modèle</label>
-                  <input
-                    type="text"
-                    name="model"
-                    placeholder="Ex: Iphone 12"
-                    value={formik.values.models}
-                    onChange={formik.handleChange}
+                  <Autosuggest
+                    inputProps={{
+                      placeholder: "Ex: iPhone 12",
+                      value: formik.values.model,
+                      onChange: handleInputChangeModel,
+                      name: "model",
+                    }}
+                    suggestions={suggestionsModel}
+                    onSuggestionsFetchRequested={({ value }) =>
+                      setSuggestionsModel(getSuggestionsModel(value))
+                    }
+                    onSuggestionsClearRequested={() => setSuggestionsModel([])}
+                    getSuggestionValue={(suggestion) => suggestion.name}
+                    renderSuggestion={renderSuggestionModel}
                   />
                 </div>
                 <div>
@@ -296,6 +365,7 @@ export default function Calculator() {
           )}
         </div>
       </div>
+      <ToastContainer limit={1} />
     </div>
   );
 }
