@@ -1,0 +1,20 @@
+/* theme.css */
+
+.container {
+  background-color: var(--quad-color);
+  list-style: none;
+}
+.input {
+  background-color: var(--quad-color);
+  list-style: none;
+}
+.suggestionsContainer {
+  background-color: var(--quad-color);
+  list-style: none;
+}
+.suggestion {
+  list-style: none;
+}
+.suggestionHighlighted {
+  list-style: none;
+}
