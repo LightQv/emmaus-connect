@@ -7,6 +7,7 @@ import { formSchema } from "../services/validators";
 import { useCalcContext } from "../contexts/CalcContext";
 import ScoreChart from "../components/ScoreChart";
 import { notifyError } from "../services/toasts";
+import Chat from "../components/Chat";
 
 export default function Calculator() {
   const {
@@ -365,6 +366,7 @@ export default function Calculator() {
           )}
         </div>
       </div>
+      <Chat />
       <ToastContainer limit={1} />
     </div>
   );
