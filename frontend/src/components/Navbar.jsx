@@ -1,11 +1,14 @@
 import { NavLink } from "react-router-dom";
+import { useState } from "react";
 import { useUserContext } from "../contexts/UserContext";
 import styles from "./Navbar.module.css";
 import logo from "../assets/logo.png";
 import off from "../assets/off.svg";
+import hamburger from "../assets/icons/hamburger.svg";
 
 export default function Navbar() {
   const { user, logout } = useUserContext();
+  const [burger, setBurger] = useState(true);
 
   const navlinksAdmin = [
     { name: "CALCULATRICE", link: "calc" },
@@ -24,13 +27,21 @@ export default function Navbar() {
       <div>
         <img src={logo} alt="logo" />
       </div>
-      <ul>
+      <ul className={burger ? styles.show : styles.hide}>
+        <button
+          type="button"
+          className={styles.burgerIconClose}
+          onClick={() => setBurger(!burger)}
+        >
+          X
+        </button>
         {user.role === "Admin"
           ? navlinksAdmin.map((el) => (
               <li key={el.link}>
                 <NavLink
                   to={`/${el.link}`}
                   type="button"
+                  onClick={() => setBurger(!burger)}
                   className={({ isActive }) =>
                     isActive ? `${styles.active} ${styles.link}` : styles.link
                   }
@@ -59,6 +70,13 @@ export default function Navbar() {
           </button>
         </li>
       </ul>
+      <button
+        type="button"
+        className={styles.burgerIconOpen}
+        onClick={() => setBurger(!burger)}
+      >
+        <img src={hamburger} alt="burger icon" />
+      </button>
     </nav>
   );
 }

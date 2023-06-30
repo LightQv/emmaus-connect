@@ -1,12 +1,13 @@
 import { useFormik } from "formik";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import PropTypes from "prop-types";
 import { addSchema } from "../../services/validators";
 import notifySuccess, { notifyError } from "../../services/toasts";
 import APIService from "../../services/APIService";
 import styles from "./AddUser.module.css";
 
-export default function AddUser() {
+export default function AddUser({ setIsShow }) {
   // Formik Logic
   const formik = useFormik({
     initialValues: {
@@ -23,6 +24,7 @@ export default function AddUser() {
         const res = await APIService.post(`/users`, values);
         if (res) {
           notifySuccess("L'utilisateur a bien été ajouté.");
+          setIsShow(false);
         } else throw new Error();
       } catch (error) {
         if (error.request.status === 401) {
@@ -157,3 +159,7 @@ export default function AddUser() {
     </>
   );
 }
+
+AddUser.propTypes = {
+  setIsShow: PropTypes.func.isRequired,
+};

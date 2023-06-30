@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `emmaus_connect`.`brand` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
-INSERT INTO brand (name, coef) VALUES ("Apple", 1.1), ("Samsung", 1.2), ("Xiamo", 1.05);
+INSERT INTO brand (name, coef) VALUES ("Apple", 1.1), ("Samsung", 1.2), ("Xiaomi", 1.05);
 -- -----------------------------------------------------
 -- Table `emmaus_connect`.`model`
 -- -----------------------------------------------------
