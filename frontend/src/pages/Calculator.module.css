@@ -9,6 +9,40 @@
   color: var(--main-color-dark);
 }
 
+.page ul {
+  position: relative;
+}
+
+.page li {
+  list-style: none;
+  padding: 0.5rem;
+  border: 1px solid var(--quad-color);
+  border-radius: 0.5rem;
+  background-color: var(--quad-color);
+  font-weight: 600;
+  position: absolute;
+  bottom: -2.5rem;
+  left: 0;
+  width: 100%;
+  color: var(--main-color-dark);
+  cursor: pointer;
+}
+
+.page li:nth-child(2) {
+  bottom: -4.5rem;
+  left: 0;
+}
+
+.page li:nth-child(3) {
+  bottom: -6.5rem;
+  left: 0;
+}
+
+.page li:nth-child(4) {
+  bottom: -8.5rem;
+  left: 0;
+}
+
 .empty {
   width: 100%;
   height: 20%;
