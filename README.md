@@ -53,19 +53,19 @@ Create `.env` files in /frontend and /backend following `.env.sample` examples.
 
 _Login Page_
 
-![Alt text](https://imgur.com/a39c56bd-8faf-4e45-82f6-1823eb8d4869 "Login Page")
+![Alt text](https://i.imgur.com/LAuhV0n.png "Login Page")
 
 
 _Admin's upload system_
 
-![Alt text](https://imgur.com/cc1c3cb9-86b5-4734-80f7-5b2fd067c5f5 "Upload Page")
+![Alt text](https://i.imgur.com/GxYKiVP.png "Upload Page")
 
 
 _Chat-bot window_
 
-![Alt text](https://imgur.com/55c28b54-6123-4f93-9fc0-fa964244283b "Chat-bot")
+![Alt text](https://i.imgur.com/M05Iz4F.png "Chat-bot")
 
 
 _Calculator_
 
-![Alt text](https://imgur.com/b322c3c6-19c9-424f-9946-3c75a9312c60 "Calculator")
+![Alt text](https://i.imgur.com/o3jh9gV.png "Calculator")
