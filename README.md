@@ -8,7 +8,7 @@ Here's the Regional Winner (Lyon Campus) and France Finalist project.
 In a team of 4 persons (including me), we developed a fully scalable calculator using React.js, Express.js & mySQL.
 After the Login you can either being redirected on the _Admin_ or Voluunter interface based on your _account status_.
 _Administrator_ have access to the _database_ datas (smartphone brand, model, RAM units, stockage units, color, device condition, screen size and network) and can update everything simply by uploading _.csv_ files. He have access to a dashboard with a view on every _voluunter's account_ and can add, edit or delete any account.
-_Volunteers_ have access to the _calculator_ with _auto-suggestion_ for each fields based on database datas. Once the price is calculated, a category is also associated to help the _voluunter_ to classify the device. Their is also a F.A.Q if they have any question.
+_Volunteers_ have access to the _calculator_ with _auto-suggestion_ for each fields based on database datas. Once the price is calculated, a category is also associated to help the _voluunter_ to classify the device. Their is a _chat-bot_ available if the _volunteer_ dosen't know a term as _RAM_ or anything else. And also a F.A.Q if they have any question how works the calculator.
 
 ## Setup
 
@@ -28,7 +28,7 @@ Create `.env` files in /frontend and /backend following `.env.sample` examples.
 - Express server will be accessible at the address set in the /frontend's .env
 - React client will be accessible at the address set in the /backend's .env
 
-- To try the calculator, you can Login to a _Volunteer account_ with those credentials.
+- To try the calculator, you can Login to a _Volunteer account_ with : _luciechev@gmail.com_ and _serenity_.
 
 ### Available Commands
 
@@ -49,25 +49,23 @@ Create `.env` files in /frontend and /backend following `.env.sample` examples.
 - _ Airbnb Standard_ : One of the most known "standards", even though it's not officially linked to ES/JS
 - _Nodemon_ : Allows to restart the server everytime a .js file is udated
 
-### Deployement
+### Insight
 
-Work in progress. Here's some screenshot while it's done.
+_Login Page_
 
-_Landing Page with User's posts_
-
-![Alt text](https://i.imgur.com/nDN3ASk.png "Landing Page")
+![Alt text](https://imgur.com/a39c56bd-8faf-4e45-82f6-1823eb8d4869 "Login Page")
 
 
-_Share a Feeling_
+_Admin's upload system_
 
-![Alt text](https://i.imgur.com/MdNObZW.png "Share Page")
-
-
-_My Profile Page_
-
-![Alt text](https://i.imgur.com/xJJo0jK.png "My Profile")
+![Alt text](https://imgur.com/cc1c3cb9-86b5-4734-80f7-5b2fd067c5f5 "Upload Page")
 
 
-_Settings Page_
+_Chat-bot window_
 
-![Alt text](https://i.imgur.com/FLjC4nQ.png "Settings")
+![Alt text](https://imgur.com/55c28b54-6123-4f93-9fc0-fa964244283b "Chat-bot")
+
+
+_Calculator_
+
+![Alt text](https://imgur.com/b322c3c6-19c9-424f-9946-3c75a9312c60 "Calculator")
